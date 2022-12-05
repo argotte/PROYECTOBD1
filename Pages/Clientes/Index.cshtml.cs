@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PROYECTOBD1.Modelos;
 using System.Data.SqlClient;
 
 namespace PROYECTOBD1.Pages.Clientes
 {
     public class IndexModel : PageModel
     {
-        public List<ClienteInfo> listaClientes = new List<ClienteInfo>();
+        public List<ClienteModelo> listaClientes = new List<ClienteModelo>();
         public void OnGet()
         {
             try
@@ -15,19 +16,21 @@ namespace PROYECTOBD1.Pages.Clientes
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "SELECT * FROM CLIENTES";
+                    String sql = "select C.ID,C.NOMBRE AS CLIENTE,CI.NOMBRE AS CIUDAD,PA.NOMBRE AS PAIS FROM DJR_CLIENTES AS C " +
+                        "INNER JOIN DJR_CIUDADES CI  ON C.FK_ID_CIUDAD = CI.ID " +
+                        "INNER JOIN DJR_PAISES   PA  ON CI.FK_ID_PAIS = PA.ID";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                ClienteInfo clienteInfo = new ClienteInfo();
-                                clienteInfo.ID = "" + reader.GetInt32(0);
-                                clienteInfo.NOMBRE = reader.GetString(1);
-                                clienteInfo.FK_ID_CIUDAD = "" + reader.GetInt32(2);
-                                clienteInfo.FK_ID_PAIS = "" + reader.GetInt32(3);
-                                listaClientes.Add(clienteInfo);
+                                ClienteModelo clienteModelo = new ClienteModelo();
+                                clienteModelo.ID = "" + reader.GetInt32(0);
+                                clienteModelo.NOMBRE = reader.GetString(1);
+                                clienteModelo.FK_ID_CIUDAD = reader.GetString(2);
+                                clienteModelo.FK_ID_PAIS = reader.GetString(3);
+                                listaClientes.Add(clienteModelo);
                             }
                         }
                     }
@@ -40,12 +43,6 @@ namespace PROYECTOBD1.Pages.Clientes
         }
     }
 
-    public class ClienteInfo
-    {
-        public string? ID;
-        public string? NOMBRE;
-        public string? FK_ID_CIUDAD;
-        public string? FK_ID_PAIS;
 
-    }
+
 }
