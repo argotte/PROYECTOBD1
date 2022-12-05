@@ -1,0 +1,33 @@
+﻿@page
+@model PROYECTOBD1.Pages.Clientes.IndexModel
+@{
+}
+<br />
+<h2>LISTA DE CLIENTES</h2>
+<a class='btn btn-primary btn-sm' href='Clientes/Crear'>Nuevo Cliente</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>FK_CIUDAD_PAIS</th>
+            <th>FK_PAIS</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaClientes)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.NOMBRE</td>
+                <td>@item.FK_ID_CIUDAD</td>
+                <td>@item.FK_ID_PAIS</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Clientes/Editar?id=">EDITAR</a>
+                    <a class="btn btn-danger btn-sm" href="/Clientes/Eliminar?id=">ELIMINAR</a>
+                </td>
+
+            </tr>
+        } 
+    </tbody>
+</table>
