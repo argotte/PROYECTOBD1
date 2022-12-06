@@ -1,0 +1,30 @@
+﻿@page
+@model PROYECTOBD1.Pages.Proveedores.IndexModel
+@{
+}
+<br />
+<h2>LISTA DE PROVEEDORES</h2>
+<a class='btn btn-primary btn-sm' href='Proveedor/Crear'>Nuevo Proveedor</a>
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>TIPO DE NEGOCIO</th>
+            <th>CIUDAD</th>
+            <th>PAIS</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaProveedor)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.NOMBRE</td>
+                <td>@item.FK_ID_TIPO_NEGOCIO</td>
+                <td>@item.FK_ID_CIUDAD</td>
+                <td>@item.FK_ID_PAIS</td>
+            </tr>
+        } 
+    </tbody>
+</table>

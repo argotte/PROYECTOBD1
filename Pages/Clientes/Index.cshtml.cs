@@ -26,10 +26,10 @@ namespace PROYECTOBD1.Pages.Clientes
                             while (reader.Read())
                             {
                                 ClienteModelo clienteModelo = new ClienteModelo();
-                                clienteModelo.ID = "" + reader.GetInt32(0);
-                                clienteModelo.NOMBRE = reader.GetString(1);
-                                clienteModelo.FK_ID_CIUDAD = reader.GetString(2);
-                                clienteModelo.FK_ID_PAIS = reader.GetString(3);
+                                clienteModelo.ID = (reader.IsDBNull(0) != null) ? "" + reader.GetInt32(0):"";
+                                clienteModelo.NOMBRE = (reader.IsDBNull(1) != null) ? reader.GetString(1):"";
+                                clienteModelo.FK_ID_CIUDAD = (reader.IsDBNull(2) != null) ? reader.GetString(2):"";
+                                clienteModelo.FK_ID_PAIS = (reader.IsDBNull(3) != null) ? reader.GetString(3):"";
                                 listaClientes.Add(clienteModelo);
                             }
                         }

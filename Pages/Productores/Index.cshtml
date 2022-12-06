@@ -1,0 +1,34 @@
+﻿@page
+@model PROYECTOBD1.Pages.Productores.IndexModel
+@{
+}
+<br />
+<h2>LISTA DE PRODUCTORES</h2>
+<a class='btn btn-primary btn-sm' href='Productores/Crear'>Nuevo Productor</a>
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>ENVASE ESTANDAR</th>
+            <th>COOPERATIVA</th>
+            <th>DIRECCION</th>
+            <th>CIUDAD</th>
+            <th>PAIS</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaProductor)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.NOMBRE</td>
+                <td>@item.ENVASE_ESTANDAR</td>
+                <td>@item.FK_COOPERATIVA</td>
+                <td>@item.DIRECCION</td>
+                <td>@item.FK_ID_CIUDAD</td>
+                <td>@item.FK_ID_PAIS</td>
+            </tr>
+        } 
+    </tbody>
+</table>

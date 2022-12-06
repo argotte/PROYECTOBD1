@@ -2,8 +2,8 @@
 {
     public class PaisModelo
     {
-        public string? ID;
-        public string? NOMBRE;
-        public string? CONTINENTE;
+        public string ID { get; set; }
+        public string NOMBRE { get; set; }
+        public string CONTINENTE { get; set; }
     }
 }
