@@ -3,7 +3,21 @@
 @{
 }
 <br />
-<h2>LISTA DE PRODUCTORES</h2>
+<form method="post">
+    <h2>LISTA DE PRODUCTORES</h2>
+    <h1 class="text-center">
+        <h2>SELECCIONA UN PAIS</h2>
+        <hr />
+        
+            <select id="Select1" name="pais" asp-items="@(new SelectList(Model.listaPaises,"NOMBRE","NOMBRE"))">
+                <option value="" selected disabled>SELECCIONAR PAIS</option>
+            </select>
+            <input type="submit" value="ACEPTAR" />
+       
+
+    </h1>
+
+</form>
 <a class='btn btn-primary btn-sm' href='Productores/Crear'>Nuevo Productor</a>
 <table id="myTable" class="table table-bordered table-hover table-sm">
     <thead>

@@ -15,6 +15,7 @@
         </tr>
     </thead>
     <tbody>
+        
         @foreach (var item in Model.listaClientes)
         {
             <tr>
@@ -22,7 +23,6 @@
                 <td>@item.NOMBRE</td>
                 <td>@item.FK_ID_CIUDAD</td>
                 <td>@item.FK_ID_PAIS</td>
-
             </tr>
         } 
     </tbody>

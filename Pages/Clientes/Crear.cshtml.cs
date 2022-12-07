@@ -7,6 +7,8 @@ namespace PROYECTOBD1.Pages.Clientes
 {
     public class CrearModel : PageModel
     {
+        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+        public List<PaisModelo> listaPaises = new List<PaisModelo>();
         public ClienteModelo clienteModelo = new ClienteModelo();
         public string error = "";
         public string correcto="";
@@ -14,6 +16,31 @@ namespace PROYECTOBD1.Pages.Clientes
 
         public void OnGet()
         {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    String sql = "SELECT P.NOMBRE FROM DJR_PAISES AS P";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                PaisModelo paisModelo = new PaisModelo();
+                                paisModelo.NOMBRE = reader.GetString(0);
+                                listaPaises.Add(paisModelo);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public void OnPost()
@@ -28,7 +55,6 @@ namespace PROYECTOBD1.Pages.Clientes
             }
             try
             {
-                String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
                 using (SqlConnection connection = new SqlConnection(connectionString)) 
                 { 
                     connection.Open();
