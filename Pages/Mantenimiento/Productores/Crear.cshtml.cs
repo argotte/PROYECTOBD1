@@ -86,7 +86,7 @@ namespace PROYECTOBD1.Pages.Productores
             productorModelo.ENVASE_ESTANDAR = "";
 
             correcto = "PRODUCTOR AGREGADO CORRECTAMENTE";
-            Response.Redirect("/PRODUCTORES/Index");
+            Response.Redirect("/Mantenimiento/PRODUCTORES/Index");
         }
     }
 }

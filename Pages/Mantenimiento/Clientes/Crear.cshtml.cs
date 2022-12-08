@@ -76,7 +76,7 @@ namespace PROYECTOBD1.Pages.Clientes
             //ahora salva la info en la bd
             clienteModelo.NOMBRE = ""; clienteModelo.FK_ID_CIUDAD = ""; clienteModelo.FK_ID_PAIS = "";
             correcto = "CLIENTE AGREGADO CORRECTAMENTE";
-            Response.Redirect("/Clientes/Index");
+            Response.Redirect("/Mantenimiento/Clientes/Index");
         }
     }
 }
