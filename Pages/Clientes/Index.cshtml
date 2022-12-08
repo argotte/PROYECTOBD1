@@ -3,8 +3,20 @@
 @{
 }
 <br />
-<h2>LISTA DE CLIENTES</h2>
-<a class='btn btn-primary btn-sm' href='Clientes/Crear'>Nuevo Cliente</a>
+<form method="post">
+    <h2>LISTA DE CLIENTES</h2>
+    <h1 class="text-center">
+        <h2>SELECCIONA UN PAIS</h2>
+        <hr />
+        @*                                                                             CUAL TOMA,CUAL MUESTRA*@
+        <select id="Select2" name="pais" asp-items="@(new SelectList(Model.listaPaises,"NOMBRE","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR PAIS</option>
+        </select>
+
+        <input type="submit" value="ACEPTAR" />
+    </h1>
+</form>
+<a class='btn btn-primary btn-sm' href='/Clientes/Crear'>Nuevo Cliente</a>
 <table id="myTable" class="table table-bordered table-hover table-sm">
     <thead>
         <tr>
@@ -21,8 +33,8 @@
             <tr>
                 <td>@item.ID</td>
                 <td>@item.NOMBRE</td>
-                <td>@item.FK_ID_CIUDAD</td>
-                <td>@item.FK_ID_PAIS</td>
+                <td>@item.NOMBRECIUDAD</td>
+                <td>@item.NOMBREPAIS</td>
             </tr>
         } 
     </tbody>

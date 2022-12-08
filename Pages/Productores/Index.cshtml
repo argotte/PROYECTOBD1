@@ -8,15 +8,13 @@
     <h1 class="text-center">
         <h2>SELECCIONA UN PAIS</h2>
         <hr />
-        
-            <select id="Select1" name="pais" asp-items="@(new SelectList(Model.listaPaises,"NOMBRE","NOMBRE"))">
+        @*                                                                             CUAL TOMA,CUAL MUESTRA*@
+        <select id="Select1" name="pais" asp-items="@(new SelectList(Model.listaPaises,"NOMBRE","NOMBRE"))">
                 <option value="" selected disabled>SELECCIONAR PAIS</option>
             </select>
+          
             <input type="submit" value="ACEPTAR" />
-       
-
     </h1>
-
 </form>
 <a class='btn btn-primary btn-sm' href='Productores/Crear'>Nuevo Productor</a>
 <table id="myTable" class="table table-bordered table-hover table-sm">
@@ -25,7 +23,7 @@
             <th>ID</th>
             <th>NOMBRE</th>
             <th>ENVASE ESTANDAR</th>
-            <th>COOPERATIVA</th>
+       @*     <th>COOPERATIVA</th>*@
             <th>DIRECCION</th>
             <th>CIUDAD</th>
             <th>PAIS</th>
@@ -38,10 +36,10 @@
                 <td>@item.ID</td>
                 <td>@item.NOMBRE</td>
                 <td>@item.ENVASE_ESTANDAR</td>
-                <td>@item.FK_COOPERATIVA</td>
+               @* <td>@item.FK_COOPERATIVA</td>*@
                 <td>@item.DIRECCION</td>
-                <td>@item.FK_ID_CIUDAD</td>
-                <td>@item.FK_ID_PAIS</td>
+                <td>@item.NOMBRECIUDAD</td>
+                <td>@item.NOMBREPAIS</td>
             </tr>
         } 
     </tbody>

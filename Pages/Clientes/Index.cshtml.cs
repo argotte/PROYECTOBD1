@@ -7,29 +7,113 @@ namespace PROYECTOBD1.Pages.Clientes
 {
     public class IndexModel : PageModel
     {
+        public string pais;
+        public List<PaisModelo> listaPaises = new List<PaisModelo>();
+        public List<CiudadModelo> listaCiudades = new List<CiudadModelo>();
         public List<ClienteModelo> listaClientes = new List<ClienteModelo>();
-        public void OnGet()
+
+        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+
+        public void OnGet() 
         {
             try
             {
-                String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "select C.ID,C.NOMBRE AS CLIENTE,CI.NOMBRE AS CIUDAD,PA.NOMBRE AS PAIS FROM DJR_CLIENTES AS C " +
-                        "INNER JOIN DJR_CIUDADES CI  ON C.FK_ID_CIUDAD = CI.ID " +
-                        "INNER JOIN DJR_PAISES   PA  ON CI.FK_ID_PAIS = PA.ID";
+                    String sql = "SELECT P.ID,P.NOMBRE,P.CONTINENTE FROM DJR_PAISES AS P";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
+                                PaisModelo paisModelo = new PaisModelo();
+                                paisModelo.ID = "" + reader.GetInt32(0);
+                                paisModelo.NOMBRE = reader.GetString(1);
+                                paisModelo.CONTINENTE = reader.GetString(2);
+                                //       paisModelo.Ciudades= new List<CiudadModelo>();
+                                listaPaises.Add(paisModelo);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+            foreach (var item in listaPaises)
+            {
+
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        String sql = "SELECT C.ID, C.FK_ID_PAIS, C.NOMBRE FROM DJR_CIUDADES AS C " +
+                                     "INNER JOIN DJR_PAISES P " +
+                                     "ON C.FK_ID_PAIS=P.ID " +
+                                     "WHERE P.ID = @IDPAIS";
+                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        {
+                            command.Parameters.AddWithValue("@IDPAIS", Int32.Parse(item.ID));
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                item.Ciudades = new List<CiudadModelo>();
+                                while (reader.Read())
+                                {
+                                    CiudadModelo ciudadModelo = new CiudadModelo();
+                                    ciudadModelo.ID = "" + reader.GetInt32(0);
+                                    ciudadModelo.FK_ID_PAIS = "" + reader.GetInt32(1);
+                                    ciudadModelo.NOMBRE = reader.GetString(2);
+                                    item.Ciudades.Add(ciudadModelo);
+                                }
+                            }
+                        }
+                    }
+                    //CiudadModelo ciudadModelo = new CiudadModelo();
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
+        public void OnPost()
+        {
+            try
+            {
+                pais = Request.Form["pais"];
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    String sql = "SELECT C.ID,C.NOMBRE ,C.FK_ID_CIUDAD, C.FK_ID_PAIS, " +
+                                 "CI.NOMBRE, PA.NOMBRE " +
+                                 "FROM DJR_CLIENTES AS C " +
+                                 "INNER JOIN DJR_CIUDADES AS CI ON C.FK_ID_CIUDAD=CI.ID " +
+                                 "INNER JOIN DJR_PAISES AS PA ON CI.FK_ID_PAIS=PA.ID " +
+                                 "WHERE PA.NOMBRE=@PAIS";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@PAIS", pais);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                      //      command.Parameters.AddWithValue("@PAIS", pais);
+                            while (reader.Read())
+                            {
                                 ClienteModelo clienteModelo = new ClienteModelo();
-                                clienteModelo.ID = (reader.IsDBNull(0) != null) ? "" + reader.GetInt32(0):"";
-                                clienteModelo.NOMBRE = (reader.IsDBNull(1) != null) ? reader.GetString(1):"";
-                                clienteModelo.FK_ID_CIUDAD = (reader.IsDBNull(2) != null) ? reader.GetString(2):"";
-                                clienteModelo.FK_ID_PAIS = (reader.IsDBNull(3) != null) ? reader.GetString(3):"";
+                                clienteModelo.ID            = (reader.IsDBNull(0) != true) ? "" + reader.GetInt32(0):"";
+                                clienteModelo.NOMBRE        = (reader.IsDBNull(1) != true) ? reader.GetString(1):"";
+                                clienteModelo.FK_ID_CIUDAD  = (reader.IsDBNull(2) != true) ? ""+reader.GetInt32(2):"";
+                                clienteModelo.FK_ID_PAIS    = (reader.IsDBNull(3) != true) ? ""+reader.GetInt32(3):"";
+                                clienteModelo.NOMBRECIUDAD  = (reader.IsDBNull(4) != true) ? reader.GetString(4) : "";
+                                clienteModelo.NOMBREPAIS    = (reader.IsDBNull(5) != true) ? reader.GetString(5) : "";
                                 listaClientes.Add(clienteModelo);
                             }
                         }
@@ -40,6 +124,7 @@ namespace PROYECTOBD1.Pages.Clientes
             {
                 Console.WriteLine("ERROR: " + ex.Message);
             }
+            OnGet();
         }
     }
 

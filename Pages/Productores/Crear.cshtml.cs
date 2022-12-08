@@ -3,28 +3,31 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using PROYECTOBD1.Modelos;
 using System.Data.SqlClient;
 
-namespace PROYECTOBD1.Pages.Clientes
+namespace PROYECTOBD1.Pages.Productores
 {
     public class CrearModel : PageModel
     {
         String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
         public List<CiudadModelo> listaCiudades = new List<CiudadModelo>();
-        public ClienteModelo clienteModelo = new ClienteModelo();
+        public ProductorModelo productorModelo = new ProductorModelo();
         public string error = "";
-        public string correcto="";
+        public string correcto = "";
         public string pais, ciudad;
 
         public void OnGet()
         {
-
         }
         public void OnPost()
         {
-            clienteModelo.NOMBRE = Request.Form["NOMBRE"];
-            clienteModelo.FK_ID_PAIS = Request.Form["FK_ID_PAIS"];
-            clienteModelo.FK_ID_CIUDAD = Request.Form["FK_ID_CIUDAD"];
-            if (clienteModelo.FK_ID_PAIS.Length == 0 || clienteModelo.FK_ID_PAIS.Length == 0 || clienteModelo.NOMBRE.Length == 0)
+            productorModelo.NOMBRE = Request.Form["NOMBRE"];
+            productorModelo.ENVASE_ESTANDAR = Request.Form["ENVASE_ESTANDAR"];
+            productorModelo.DIRECCION = Request.Form["DIRECCION"];
+            productorModelo.NOMBREPAIS = Request.Form["NOMBREPAIS"];
+            productorModelo.NOMBRECIUDAD = Request.Form["NOMBRECIUDAD"];
+            
+
+            if (productorModelo.NOMBREPAIS.Length == 0 || productorModelo.NOMBRECIUDAD.Length == 0 || productorModelo.NOMBRE.Length == 0 || productorModelo.DIRECCION.Length == 0)
             {
                 error = "TODOS LOS CAMPOS SON REQUERIDOS";
                 return;
@@ -37,8 +40,8 @@ namespace PROYECTOBD1.Pages.Clientes
                     String sql = "SELECT P.ID,C.ID FROM DJR_PAISES AS P INNER JOIN DJR_CIUDADES C ON P.ID=C.FK_ID_PAIS WHERE P.NOMBRE= @PAIS AND C.NOMBRE= @CIUDAD";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {            
-                        command.Parameters.AddWithValue("@PAIS", clienteModelo.FK_ID_PAIS);
-                        command.Parameters.AddWithValue("@CIUDAD", clienteModelo.FK_ID_CIUDAD);
+                        command.Parameters.AddWithValue("@PAIS", productorModelo.NOMBREPAIS);
+                        command.Parameters.AddWithValue("@CIUDAD", productorModelo.NOMBRECIUDAD);
                        // command.ExecuteNonQuery();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -50,18 +53,23 @@ namespace PROYECTOBD1.Pages.Clientes
                         }
                     }
                 }
+                productorModelo.FK_ID_PAIS = pais;
+                productorModelo.FK_ID_CIUDAD = ciudad;
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "INSERT INTO DJR_CLIENTES" +
-                                "(NOMBRE,FK_ID_PAIS,FK_ID_CIUDAD) VALUES" +
-                                "(@NOMBRE,@FK_ID_PAIS,@FK_ID_CIUDAD);";
+                    String sql = "INSERT INTO DJR_PRODUCTORES" +
+                                "(NOMBRE,FK_ID_PAIS,FK_ID_CIUDAD,ENVASE_ESTANDAR,DIRECCION,FK_COOPERATIVA) VALUES" +
+                                "(@NOMBRE,@FK_ID_PAIS,@FK_ID_CIUDAD,@ENVASE_ESTANDAR,@DIRECCION,@COOPERATIVA);";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@NOMBRE", clienteModelo.NOMBRE);
+                        command.Parameters.AddWithValue("@NOMBRE", productorModelo.NOMBRE);
                         command.Parameters.AddWithValue("@FK_ID_PAIS", pais);
                         command.Parameters.AddWithValue("@FK_ID_CIUDAD", ciudad);
+                        command.Parameters.AddWithValue("@ENVASE_ESTANDAR", productorModelo.ENVASE_ESTANDAR);
+                        command.Parameters.AddWithValue("@DIRECCION", productorModelo.DIRECCION);
+                        command.Parameters.AddWithValue("COOPERATIVA",1);
                         command.ExecuteNonQuery();
                     }
                     
@@ -74,9 +82,11 @@ namespace PROYECTOBD1.Pages.Clientes
                
             }
             //ahora salva la info en la bd
-            clienteModelo.NOMBRE = ""; clienteModelo.FK_ID_CIUDAD = ""; clienteModelo.FK_ID_PAIS = "";
-            correcto = "CLIENTE AGREGADO CORRECTAMENTE";
-            Response.Redirect("/Clientes/Index");
+            productorModelo.NOMBRE = ""; productorModelo.FK_ID_CIUDAD = ""; productorModelo.FK_ID_PAIS = ""; productorModelo.NOMBREPAIS = ""; productorModelo.NOMBRECIUDAD = ""; productorModelo.DIRECCION = "";
+            productorModelo.ENVASE_ESTANDAR = "";
+
+            correcto = "PRODUCTOR AGREGADO CORRECTAMENTE";
+            Response.Redirect("/PRODUCTORES/Index");
         }
     }
 }
