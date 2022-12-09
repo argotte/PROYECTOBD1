@@ -1,0 +1,43 @@
+﻿@page
+@model PROYECTOBD1.Pages.Variedades.IndexModel
+@{
+}
+<br />
+<h2>INFORMACION DE VARIEDADES DE CEREZAS</h2>
+<a class='btn btn-primary btn-sm' href='/Variedades/Crear'>Nueva Variedad</a>
+<ul class="navbar-nav flex-grow-1">
+
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+    <button class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Variedades/PrecioVariedad/Index">Precio Variedad</a>
+    </button>
+    <button class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Variedades/PaisOrigen/Index">Pais de Origen</a>
+    </button>
+    </div>
+</ul>
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>PRECOCIDAD</th>
+            <th>NOMBRE</th>
+            <th>FIRMEZA</th>
+            <th>COLOR</th>
+            <th>ESPECIE</th>
+            <th>DESCRIPCION</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaVariedades)
+        {
+            <tr>
+                <td>@item.PRECOCIDAD</td>
+                <td>@item.NOMBRE</td>
+                <td>@item.FIRMEZA</td>
+                <td>@item.COLOR</td>
+                <td>@item.ESPECIE</td>
+                <td>@item.DESCRIPCION</td>
+            </tr>
+        }
+    </tbody>
+</table>

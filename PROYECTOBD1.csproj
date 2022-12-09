@@ -12,4 +12,9 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Variedades\PaisOrigen\" />
+    <Folder Include="Pages\Variedades\PrecioVariedad\" />
+  </ItemGroup>
+
 </Project>
