@@ -1,9 +1,9 @@
 ﻿@page
-@model PROYECTOBD1.Pages.Clientes.CrearModel
+@model PROYECTOBD1.Pages.Proveedores.CrearModel
 @{
 }
 <br />
-<h2>NUEVO CLIENTE</h2>
+<h2>NUEVO PROVEEDOR</h2>
 @if (Model.error.Length>0){
     <div class='alert alert-warning alert-dismissible fade show' role='alert'>
         <strong>@Model.error</strong>
@@ -14,22 +14,27 @@
 
 <form method="POST">
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Nombre</label>
+        <label class="col-sm-3 col-form-label">NOMBRE</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="NOMBRE" value="@Model.clienteModelo.NOMBRE">
+            <input type="text" class="form-control" name="NOMBRE" value="@Model.proveedorModelo.NOMBRE">
            
         </div>
     </div>
     <div class="row mb-3">
+    <select id="Select1" name="TIPONEGOCIO" asp-items="@(new SelectList(Model.listaTipoNegocios,"NOMBRE","NOMBRE"))">
+        <option value="" selected disabled>SELECCIONAR TIPO DE NEGOCIO</option>
+    </select>
+    </div>
+    <div class="row mb-3">
         <label class="col-sm-3 col-form-label">PAIS DE ORIGEN</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="FK_ID_PAIS" value="@Model.clienteModelo.FK_ID_PAIS">
+            <input type="text" class="form-control" name="NOMBREPAIS" value="@Model.proveedorModelo.NOMBREPAIS">
         </div>
     </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">CIUDAD DE ORIGEN</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="FK_ID_CIUDAD" value="@Model.clienteModelo.FK_ID_CIUDAD">
+            <input type="text" class="form-control" name="NOMBRECIUDAD" value="@Model.proveedorModelo.NOMBRECIUDAD">
         </div>
     </div>
 
