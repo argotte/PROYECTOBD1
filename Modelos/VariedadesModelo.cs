@@ -9,5 +9,10 @@
         public string COLOR { get; set; }
         public string ESPECIE { get; set; }
         public string DESCRIPCION { get; set; }
+
+
+        /////
+        ///
+        public string PAISNOMBRE { get; set; }
     }
 }

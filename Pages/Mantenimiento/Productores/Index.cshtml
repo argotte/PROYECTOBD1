@@ -27,6 +27,7 @@
             <th>DIRECCION</th>
             <th>CIUDAD</th>
             <th>PAIS</th>
+            <th> </th>
         </tr>
     </thead>
     <tbody>
@@ -40,6 +41,9 @@
                 <td>@item.DIRECCION</td>
                 <td>@item.NOMBRECIUDAD</td>
                 <td>@item.NOMBREPAIS</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Mantenimiento/Productores/Cultivos/Cultivos?id=@item.ID">CULTIVOS</a>
+                </td>
             </tr>
         } 
     </tbody>

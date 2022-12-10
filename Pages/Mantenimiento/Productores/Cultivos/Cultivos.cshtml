@@ -1,0 +1,43 @@
+﻿@page
+@model PROYECTOBD1.Pages.Mantenimiento.Productores.Cultivos.CultivosModel
+@{
+}
+<br />
+<h2>CULTIVOS DE PRODUCTOR</h2>
+@if (Model.error.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.error</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='close'></button>
+    </div>
+}
+
+
+<form method="post">
+    <input type="hidden" name="id" value="@Model.productorModelo.ID">
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+                <th>TIPO DE VARIEDAD</th>
+                <th>CALIBRE</th>
+                <th>PRODUCCION ESTIMADA EN KG</th>
+                <th>INICIO DE DISPONIBILIDAD</th>
+                <th>FIN DE DISPONIBILIDAD</th>                
+                <th>MAXIMO DESTINADO A EXPORTACION</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaCultivos)
+        {
+            <tr>
+                <td>@item.NOMBREVARIEDAD</td>
+                <td>@item.CALIBRE</td>
+                <td>@item.PRODUCCION_ESTIMADA_KG</td>
+                <td>@item.PERIODO_INICIO_DISPONIBILIDAD</td>
+                <td>@item.PERIODO_FIN_DISPONIBILIDAD</td>
+                <td>@item.MAX_DESTINADO_EXPORTACION</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</form>

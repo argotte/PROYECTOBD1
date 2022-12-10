@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Variedades\PaisOrigen\" />
     <Folder Include="Pages\Variedades\PrecioVariedad\" />
   </ItemGroup>
 

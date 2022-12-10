@@ -3,17 +3,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using PROYECTOBD1.Modelos;
 using System.Data.SqlClient;
 
-namespace PROYECTOBD1.Pages.Variedades
+namespace PROYECTOBD1.Pages.PaisOrigen
 {
     public class IndexModel : PageModel
     {
-        string pais = "";
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
-        public List<VariedadesModelo> listaVariedades = new List<VariedadesModelo>();
+        public string pais;
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
-        public void OnGet()
-        {
+        public List<CiudadModelo> listaCiudades = new List<CiudadModelo>();
+        public List<ClienteModelo> listaClientes = new List<ClienteModelo>();
 
+        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+
+        public void OnGet() 
+        {
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -36,17 +38,17 @@ namespace PROYECTOBD1.Pages.Variedades
                         }
                     }
                 }
-                //CiudadModelo ciudadModelo = new CiudadModelo();
-
             }
             catch (Exception)
             {
 
                 throw;
             }
-        }
 
-        public void OnPost() 
+
+
+        }
+        public void OnPost()
         {
             try
             {
@@ -54,38 +56,41 @@ namespace PROYECTOBD1.Pages.Variedades
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "select PA.NOMBRE AS PAIS,VA.ID,VA.PRECOCIDAD,VA.NOMBRE,VA.FIRMEZA,VA.COLOR,VA.ESPECIE,VA.DESCRIPCION FROM DJR_PAISES_ORIGEN AS PO " +
-                                 "INNER JOIN DJR_PAISES AS PA ON PO.FK_ID_PAIS = PA.ID " +
-                                 "INNER JOIN DJR_VARIEDADES AS VA ON VA.ID=PO.FK_ID_VARIEDAD " +
-                                 "WHERE PA.NOMBRE = @PAIS";
+                    String sql = "SELECT C.ID,C.NOMBRE ,C.FK_ID_CIUDAD, C.FK_ID_PAIS, " +
+                                 "CI.NOMBRE, PA.NOMBRE " +
+                                 "FROM DJR_CLIENTES AS C " +
+                                 "INNER JOIN DJR_CIUDADES AS CI ON C.FK_ID_CIUDAD=CI.ID " +
+                                 "INNER JOIN DJR_PAISES AS PA ON CI.FK_ID_PAIS=PA.ID " +
+                                 "WHERE PA.NOMBRE=@PAIS";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@PAIS", pais);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+                      //      command.Parameters.AddWithValue("@PAIS", pais);
                             while (reader.Read())
                             {
-                                VariedadesModelo variedadesModelo = new VariedadesModelo();
-                                variedadesModelo.PAISNOMBRE = (reader.IsDBNull(0) != true) ? reader.GetString(0) : "";
-                                variedadesModelo.ID = (reader.IsDBNull(1) != true) ? "" + reader.GetInt32(1) : "";
-                                variedadesModelo.PRECOCIDAD = (reader.IsDBNull(2) != true) ? reader.GetString(2) : "";
-                                variedadesModelo.NOMBRE = (reader.IsDBNull(3) != true) ? reader.GetString(3) : "";
-                                variedadesModelo.FIRMEZA = (reader.IsDBNull(4) != true) ? reader.GetString(4) : "";
-                                variedadesModelo.COLOR = (reader.IsDBNull(5) != true) ? reader.GetString(5) : "";
-                                variedadesModelo.ESPECIE = (reader.IsDBNull(6) != true) ? reader.GetString(6) : "";
-                                variedadesModelo.DESCRIPCION = (reader.IsDBNull(7) != true) ? reader.GetString(7) : "";
-                                listaVariedades.Add(variedadesModelo);
+                                ClienteModelo clienteModelo = new ClienteModelo();
+                                clienteModelo.ID            = (reader.IsDBNull(0) != true) ? "" + reader.GetInt32(0):"";
+                                clienteModelo.NOMBRE        = (reader.IsDBNull(1) != true) ? reader.GetString(1):"";
+                                clienteModelo.FK_ID_CIUDAD  = (reader.IsDBNull(2) != true) ? ""+reader.GetInt32(2):"";
+                                clienteModelo.FK_ID_PAIS    = (reader.IsDBNull(3) != true) ? ""+reader.GetInt32(3):"";
+                                clienteModelo.NOMBRECIUDAD  = (reader.IsDBNull(4) != true) ? reader.GetString(4) : "";
+                                clienteModelo.NOMBREPAIS    = (reader.IsDBNull(5) != true) ? reader.GetString(5) : "";
+                                listaClientes.Add(clienteModelo);
                             }
                         }
                     }
                 }
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Console.WriteLine("ERROR: " + ex.Message);
             }
+            OnGet();
         }
     }
+
+
+
 }

@@ -1,9 +1,9 @@
 ﻿@page
-@model PROYECTOBD1.Pages.Variedades.CrearModel
+@model PROYECTOBD1.Pages.PaisOrigen.CrearModel
 @{
 }
 <br />
-<h2>NUEVO PRODUCTOR</h2>
+<h2>AGREGAR NUEVO PAIS DE ORIGEN A VARIEDAD DE CEREZA</h2>
 @if (Model.error.Length>0){
     <div class='alert alert-warning alert-dismissible fade show' role='alert'>
         <strong>@Model.error</strong>
@@ -13,12 +13,6 @@
 
 
 <form method="POST">
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">ASIGNE UN PAIS DE ORIGEN (PARA AGREGAR MAS PAISES DE ORIGEN IR A SUS DETALLES)</label>
-            <select id="Select1" name="pais" asp-items="@(new SelectList(Model.listaPaises,"NOMBRE","NOMBRE"))">
-                <option value="" selected disabled>SELECCIONAR PAIS</option>
-            </select>
-    </div>
     <div class="row mb-3">
         <label class="col-sm-3 col-form-label">PRECOCIDAD</label>
         <select id="Select4" name="PRECOCIDAD">
@@ -31,37 +25,12 @@
         </select>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">NOMBRE</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="NOMBRE" value="@Model.variedadesModelo.NOMBRE">
-
-        </div>
-    </div>
-    <div class="row mb-3">
         <label class="col-sm-3 col-form-label">FIRMEZA</label>
         <select name="FIRMEZA">
             <option value="" selected disabled>SELECCIONAR FIRMEZA</option>
             <option value="MEDIA">MEDIA</option>
             <option value="FIRME">FIRME</option>
         </select>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">COLOR</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="COLOR" value="@Model.variedadesModelo.COLOR">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">ESPECIE</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="ESPECIE" value="@Model.variedadesModelo.ESPECIE">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">DESCRIPCION</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="DESCRIPCION" value="@Model.variedadesModelo.DESCRIPCION">
-        </div>
     </div>
 
     @if (Model.correcto.Length>0)
