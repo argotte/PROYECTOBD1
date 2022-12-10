@@ -43,7 +43,7 @@ namespace PROYECTOBD1.Pages.Mantenimiento.Productores.Cultivos
                                 cultivosModelo.CALIBRE = (reader.IsDBNull(4) != true) ? ""+ reader.GetInt32(4) :"" ;
                                 cultivosModelo.PRODUCCION_ESTIMADA_KG = (reader.IsDBNull(5) != true) ? "" + reader.GetInt32(5) : "";
                                 cultivosModelo.PERIODO_INICIO_DISPONIBILIDAD = (reader.IsDBNull(6) != true) ? reader.GetDateTime(6).ToString("yyyy-MM-dd") : "";
-                                cultivosModelo.PERIODO_FIN_DISPONIBILIDAD = (reader.IsDBNull(7) != true) ? reader.GetDateTime(6).ToString("yyyy-MM-dd") : "";
+                                cultivosModelo.PERIODO_FIN_DISPONIBILIDAD = (reader.IsDBNull(7) != true) ? reader.GetDateTime(7).ToString("yyyy-MM-dd") : "";
                                 cultivosModelo.MAX_DESTINADO_EXPORTACION = (reader.IsDBNull(8) != true) ? "" + reader.GetInt32(8) : "";
                                 listaCultivos.Add(cultivosModelo);
                                 //Convert.ToDateTime(MyReader["DateField"]).ToString("dd/MM/yyyy");

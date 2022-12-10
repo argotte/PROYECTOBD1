@@ -11,7 +11,7 @@ namespace PROYECTOBD1.Pages.Productores
     public class IndexModel : PageModel 
     {
         //  public IEnumerable<PaisModelo> paisdisplay { get; set; }
-        public string pais;
+        public string pais, error;
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
         public List<CiudadModelo> listaCiudades = new List<CiudadModelo>();
         public List<ProductorModelo> listaProductor = new List<ProductorModelo>();
@@ -44,10 +44,10 @@ namespace PROYECTOBD1.Pages.Productores
                 //CiudadModelo ciudadModelo = new CiudadModelo();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                error=ex.Message;
             }
 
             foreach (var item in listaPaises)

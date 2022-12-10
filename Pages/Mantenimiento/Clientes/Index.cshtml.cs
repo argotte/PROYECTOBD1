@@ -93,7 +93,7 @@ namespace PROYECTOBD1.Pages.Clientes
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "SELECT C.ID,C.NOMBRE ,C.FK_ID_CIUDAD, C.FK_ID_PAIS, " +
+                    String sql = "SELECT C.ID,C.NOMBRE , C.MISION, C.RANGO_ESCALA,C.PORCENTAJE_ACEPTACION,C.FK_ID_CIUDAD, C.FK_ID_PAIS, " +
                                  "CI.NOMBRE, PA.NOMBRE " +
                                  "FROM DJR_CLIENTES AS C " +
                                  "INNER JOIN DJR_CIUDADES AS CI ON C.FK_ID_CIUDAD=CI.ID " +
@@ -105,15 +105,19 @@ namespace PROYECTOBD1.Pages.Clientes
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                       //      command.Parameters.AddWithValue("@PAIS", pais);
+                            
                             while (reader.Read())
-                            {
+                            { 
                                 ClienteModelo clienteModelo = new ClienteModelo();
                                 clienteModelo.ID            = (reader.IsDBNull(0) != true) ? "" + reader.GetInt32(0):"";
                                 clienteModelo.NOMBRE        = (reader.IsDBNull(1) != true) ? reader.GetString(1):"";
-                                clienteModelo.FK_ID_CIUDAD  = (reader.IsDBNull(2) != true) ? ""+reader.GetInt32(2):"";
-                                clienteModelo.FK_ID_PAIS    = (reader.IsDBNull(3) != true) ? ""+reader.GetInt32(3):"";
-                                clienteModelo.NOMBRECIUDAD  = (reader.IsDBNull(4) != true) ? reader.GetString(4) : "";
-                                clienteModelo.NOMBREPAIS    = (reader.IsDBNull(5) != true) ? reader.GetString(5) : "";
+                                clienteModelo.MISION        = (reader.IsDBNull(2) != true) ? reader.GetString(2) : "";
+                                clienteModelo.RANGO_ESCALA = (reader.IsDBNull(3) != true) ? "" + reader.GetInt32(3) : "";
+                                clienteModelo.PORCENTAJE_ACEPTACION = (reader.IsDBNull(4) != true) ? ""+reader.GetInt32(4) : "";
+                                clienteModelo.FK_ID_CIUDAD  = (reader.IsDBNull(5) != true) ? ""+reader.GetInt32(5):"";
+                                clienteModelo.FK_ID_PAIS    = (reader.IsDBNull(6) != true) ? ""+reader.GetInt32(6):"";
+                                clienteModelo.NOMBRECIUDAD  = (reader.IsDBNull(7) != true) ? reader.GetString(7) : "";
+                                clienteModelo.NOMBREPAIS    = (reader.IsDBNull(8) != true) ? reader.GetString(8) : "";
                                 listaClientes.Add(clienteModelo);
                             }
                         }

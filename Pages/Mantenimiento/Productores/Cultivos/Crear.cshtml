@@ -1,0 +1,79 @@
+﻿@page
+@model PROYECTOBD1.Pages.Productores.Cultivos.CrearModel
+@{
+}
+<br />
+<h2>NUEVO CULTIVO</h2>
+@if (Model.error.Length>0){
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.error</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='close'></button>
+    </div>
+}
+
+
+<form method="POST">
+    <div class="row mb-3">
+    <select id="Select1" name="NOMBREPRODUCTOR" asp-items="@(new SelectList(Model.listaProductor,"NOMBRE","NOMBRE"))">
+        <option value="" selected disabled>SELECCIONAR PRODUCTOR</option>
+    </select>
+    </div>
+    <div class="row mb-3">
+        <select id="Select2" name="NOMBREVARIEDAD" asp-items="@(new SelectList(Model.listaVariedades,"NOMBRE","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR TIPO DE VARIEDAD</option>
+        </select>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">CALIBRE</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="CALIBRE" value="@Model.cultivosModelo.CALIBRE">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">PRODUCCION ESTIMADA (KG)</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="PRODUCCIONESTIMADA" value="@Model.cultivosModelo.PRODUCCION_ESTIMADA_KG">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">FECHA DE INICIO DE DISPONIBILIDAD</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="INICIODISPONIBILIDAD" value="@Model.cultivosModelo.PERIODO_INICIO_DISPONIBILIDAD">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">FECHA DE FIN DE DISPONIBILIDAD</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="FINDISPONIBILIDAD" value="@Model.cultivosModelo.PERIODO_FIN_DISPONIBILIDAD">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">MAXIMO DESTINADO A EXPORTACION (KG)</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="MAXDESTINADO" value="@Model.cultivosModelo.MAX_DESTINADO_EXPORTACION">
+        </div>
+    </div>
+
+
+
+    @if (Model.correcto.Length>0)
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@Model.correcto</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row mb-3">
+        <div class="col-sm-5 d-grid">
+            <button type="submit" class="btn btn-primary">ACEPTAR</button>
+        </div>
+        <div class="col-sm-5 d-grid">
+            <a class="btn btn-outline-primary" href="/" role="button">CANCELAR</a>
+        </div>
+       
+    </div>
+</form>
