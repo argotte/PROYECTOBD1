@@ -1,0 +1,72 @@
+﻿@page
+@model PROYECTOBD1.Pages.Apadrinamiento.CrearModel
+@{
+}
+<br />
+<h2>NUEVO PROGRAMA DE APADRINAMIENTO</h2>
+@if (Model.error.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.error</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='close'></button>
+    </div>
+}
+
+
+<form method="POST">
+    <div class="row mb-3">
+        <select id="Select1" name="idpadrino" asp-items="@(new SelectList(Model.listaPadrinos,"DOC_IDENTIDAD","NOMBRECOMPLETO"))">
+            <option value="" selected disabled>SELECCIONAR PADRINO</option>
+        </select>
+    </div>
+    <div class="row mb-3">
+        <select id="Select1" name="idvariedad" asp-items="@(new SelectList(Model.listaProductor,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR PRODUCTOR</option>
+        </select>
+    </div>
+    <div class="row mb-3">
+        <select id="Select1" name="idproductor" asp-items="@(new SelectList(Model.listaVariedades,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR TIPO DE VARIEDAD</option>
+        </select>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">FECHA INICIAL (YYYY-MM-DDDD)</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="fechainicial" value="@Model.fechainicial">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">FECHA FINAL (YYYY-MM-DDDD)</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="fechafinal" value="@Model.fechafinal">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">APORTE ANUAL ($)</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="aporteanual" value="@Model.aporteanual">
+        </div>
+    </div>
+
+    @if (Model.correcto.Length > 0)
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@Model.correcto</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row mb-3">
+        <div class="col-sm-5 d-grid">
+            <button type="submit" class="btn btn-primary">ACEPTA</button>
+        </div>
+        <div class="col-sm-5 d-grid">
+            <a class="btn btn-outline-primary" href="/" role="button">CANCELAR</a>
+        </div>
+
+    </div>
+</form>

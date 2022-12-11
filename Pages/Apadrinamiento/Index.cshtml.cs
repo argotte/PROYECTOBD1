@@ -37,30 +37,6 @@ namespace PROYECTOBD1.Pages.Apadrinamiento
                         }
                     }
                 }
-
-                //using (SqlConnection connection = new SqlConnection(connectionString))
-                //{
-                //    connection.Open();
-                //    String sql = "SELECT P.DOC_IDENTIDAD,P.NOMBRE,P.SEGUNDO_NOMBRE,P.APELLIDO,P.SEGUNDO_APELLIDO FROM DJR_PADRINOS AS P\r\n";
-                //    using (SqlCommand command = new SqlCommand(sql, connection))
-                //    {
-                //        using (SqlDataReader reader = command.ExecuteReader())
-                //        {
-                //            while (reader.Read())
-                //            {
-                //                PadrinosModelo padrinosModelo = new PadrinosModelo();
-                //                padrinosModelo.DOC_IDENTIDAD = "" + reader.GetInt32(0);
-                //                padrinosModelo.NOMBRE = reader.GetString(1);
-                //                padrinosModelo.SEGUNDO_NOMBRE = (reader.IsDBNull(2) != true) ? reader.GetString(2) : "";
-                //                padrinosModelo.APELLIDO = reader.GetString(3);
-                //                padrinosModelo.SEGUNDO_APELLIDO = (reader.IsDBNull(4) != true) ? reader.GetString(4) : "";
-                //                padrinosModelo.NOMBRECOMPLETO = padrinosModelo.NOMBRE + " " + padrinosModelo.SEGUNDO_NOMBRE + " " + padrinosModelo.APELLIDO + " " + padrinosModelo.SEGUNDO_APELLIDO;
-                //                listaPadrinos.Add(padrinosModelo);
-                //            }
-                //        }
-                //    }
-                //}
-
             }
             catch (Exception ex)
             {
