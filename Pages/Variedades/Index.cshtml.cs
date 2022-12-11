@@ -7,12 +7,16 @@ namespace PROYECTOBD1.Pages.Variedades
 {
     public class IndexModel : PageModel
     {
+        public Connection connection2 = new Connection();
+        String connectionString = "";
+        //connectionString = connection2.ConnectionString;
         string pais = "";
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+      //  String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
         public List<VariedadesModelo> listaVariedades = new List<VariedadesModelo>();
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
 
             try
             {
@@ -46,8 +50,10 @@ namespace PROYECTOBD1.Pages.Variedades
             }
         }
 
-        public void OnPost() 
+        public void OnPost()
         {
+            connectionString = connection2.ConnectionString;
+
             try
             {
                 pais = Request.Form["pais"];

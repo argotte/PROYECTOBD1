@@ -7,7 +7,7 @@ namespace PROYECTOBD1.Pages.Proveedores
 {
     public class CrearModel : PageModel
     {
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+      //  String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
         public List<CiudadModelo> listaCiudades = new List<CiudadModelo>();
         public List<TipoNegociosModelo> listaTipoNegocios = new List<TipoNegociosModelo>();
@@ -15,9 +15,11 @@ namespace PROYECTOBD1.Pages.Proveedores
         public string error = "";
         public string correcto = "";
         public string pais, ciudad, IDtiponegocio;
-
+        public Connection connection2 = new Connection();
+        String connectionString = "";
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -49,6 +51,7 @@ namespace PROYECTOBD1.Pages.Proveedores
         }
         public void OnPost()
         {
+        connectionString = connection2.ConnectionString;
             proveedorModelo.NOMBRE = Request.Form["NOMBRE"];
             proveedorModelo.TIPONEGOCIO = Request.Form["TIPONEGOCIO"];
             proveedorModelo.NOMBREPAIS = Request.Form["NOMBREPAIS"];

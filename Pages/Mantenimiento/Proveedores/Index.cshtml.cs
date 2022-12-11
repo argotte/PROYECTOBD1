@@ -10,10 +10,13 @@ namespace PROYECTOBD1.Pages.Proveedores
         string pais = "";
         public List<ProveedorModelo> listaProveedor = new List<ProveedorModelo>();
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+        public Connection connection2 = new Connection();
+        String connectionString = "";
 
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -87,6 +90,7 @@ namespace PROYECTOBD1.Pages.Proveedores
 
         public void OnPost()
         {
+            connectionString = connection2.ConnectionString;
 
             try
             {

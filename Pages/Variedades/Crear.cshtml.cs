@@ -7,7 +7,10 @@ namespace PROYECTOBD1.Pages.Variedades
 {
     public class CrearModel : PageModel
     {
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+        public Connection connection2 = new Connection();
+        String connectionString = "";
+        //connectionString = connection2.ConnectionString;
+       // String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
         public List<VariedadesModelo> variedades = new List<VariedadesModelo>();
         public VariedadesModelo variedadesModelo = new VariedadesModelo();
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
@@ -17,6 +20,7 @@ namespace PROYECTOBD1.Pages.Variedades
 
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -50,6 +54,7 @@ namespace PROYECTOBD1.Pages.Variedades
         }
         public void OnPost()
         {
+            connectionString = connection2.ConnectionString;
             variedadesModelo.PRECOCIDAD = Request.Form["PRECOCIDAD"];
             variedadesModelo.NOMBRE = Request.Form["NOMBRE"];
             variedadesModelo.FIRMEZA = Request.Form["FIRMEZA"];

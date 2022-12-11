@@ -8,15 +8,18 @@ namespace PROYECTOBD1.Pages.Apadrinamiento
 {
     public class IndexModel : PageModel
     {
+        Connection connection2 = new Connection();
+        // connectionString = connection2.ConnectionString;
+        String connectionString = "";
         public List<ProductorModelo> listaProductor = new List<ProductorModelo>();
         public List<PadrinosModelo> listaPadrinos = new List<PadrinosModelo>();
         public List<ProgramaApadrinamientoModelo> listaPam = new List<ProgramaApadrinamientoModelo>();
         string error = "";
         string productor = "";
         string padrino = "";
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -47,6 +50,7 @@ namespace PROYECTOBD1.Pages.Apadrinamiento
 
         public void OnPost() 
         {
+            connectionString = connection2.ConnectionString;
             try
             {
                 productor = Request.Form["productor"];

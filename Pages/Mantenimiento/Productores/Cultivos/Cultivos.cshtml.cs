@@ -8,14 +8,18 @@ namespace PROYECTOBD1.Pages.Mantenimiento.Productores.Cultivos
 {
     public class CultivosModel : PageModel
     {
+        Connection connection2 = new Connection();
+        //   connectionString = connection2.ConnectionString;
+        String connectionString = "";
         public ProductorModelo productorModelo = new ProductorModelo();
         public List<CultivosModelo> listaCultivos = new List<CultivosModelo>();
         public string error = "";
         //public string correcto = "";
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+     //   String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
 
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
             string id = Request.Query["id"];
             try
             {

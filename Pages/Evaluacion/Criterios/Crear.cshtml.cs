@@ -7,7 +7,10 @@ namespace PROYECTOBD1.Pages.Evaluacion.Criterios
 {
     public class CrearModel : PageModel
     {
-        String connectionString = "Data Source=DESKTOP-P186VBB;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=12345678";
+        Connection connection2 = new Connection();
+        // connectionString = connection2.ConnectionString;
+        String connectionString = "";
+       // String connectionString = "Data Source=DESKTOP-P186VBB;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=12345678";
         public CriterioModelo criterio=new CriterioModelo();
         public string error = "";
         public string correcto = "";
@@ -17,6 +20,7 @@ namespace PROYECTOBD1.Pages.Evaluacion.Criterios
 
         public void OnPost()
         {
+            connectionString = connection2.ConnectionString;
             criterio.NOMBRE = Request.Form["NOMBRE"];
             criterio.DESCRIPCION = Request.Form["DESCRIPCION"];
             criterio.TIPO = Request.Form["TIPO"];

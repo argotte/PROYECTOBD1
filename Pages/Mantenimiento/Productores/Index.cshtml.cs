@@ -15,10 +15,12 @@ namespace PROYECTOBD1.Pages.Productores
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
         public List<CiudadModelo> listaCiudades = new List<CiudadModelo>();
         public List<ProductorModelo> listaProductor = new List<ProductorModelo>();
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+        string connectionString = "";
+        Connection connection2 = new Connection();
         public void OnGet() 
         {
-            
+            connectionString = connection2.ConnectionString;
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -92,7 +94,8 @@ namespace PROYECTOBD1.Pages.Productores
         }
         public void OnPost()
         {
-            
+            connectionString = connection2.ConnectionString;
+
             try
             {
                 pais = Request.Form["pais"];

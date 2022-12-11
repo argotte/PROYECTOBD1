@@ -8,16 +8,20 @@ namespace PROYECTOBD1.Pages.Apadrinamiento.Padrino
 {
     public class CrearModel : PageModel
     {
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+      //  String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
         public List<PadrinosModelo> listaPadrinos = new List<PadrinosModelo>();
         public string error = "";
         public string correcto = "";
         public string cedula, nombre, nombre2, nombre3, nombre4 = "";
+        Connection connection2 = new Connection();
+        // connectionString = connection2.ConnectionString;
+        String connectionString = "";
         public void OnGet()
         {
         }
         public void OnPost() 
         {
+            connectionString = connection2.ConnectionString;
             correcto = "";
             cedula = Request.Form["cedula"];
             nombre = Request.Form["nombre"];

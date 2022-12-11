@@ -7,12 +7,18 @@ namespace PROYECTOBD1.Pages.Evaluacion.Formulas
 {
     public class MostrarModel : PageModel
     {
+        public Connection connection2 = new Connection();
+        String connectionString = "";
+
         public List<FormulaModelo> listaFor = new List<FormulaModelo>();
-        String connectionString = "Data Source=DESKTOP-P186VBB;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=12345678";
+      //  String connectionString = "Data Source=DESKTOP-P186VBB;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=12345678";
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
             try
             {
+            //    connectionString = connection2.ConnectionString;
+
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();

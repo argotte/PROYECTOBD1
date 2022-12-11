@@ -7,7 +7,9 @@ namespace PROYECTOBD1.Pages.Evaluacion.Formulas
 {
     public class CrearModel : PageModel
     {
-        String connectionString = "Data Source=DESKTOP-P186VBB;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=12345678";
+       // Connection connection1 = new Connection();
+        public Connection connection2 = new Connection();
+        String connectionString = "";
         public FormulaModelo formula = new FormulaModelo();
         public string error = "";
         public string correcto = "";
@@ -18,6 +20,8 @@ namespace PROYECTOBD1.Pages.Evaluacion.Formulas
 
         public void OnPost()
         {
+            connectionString = connection2.ConnectionString;
+
             formula.TIPO = Request.Form["TIPO"];
             formula.PORCENTAJEIMPORTANCIA = Request.Form["PORCENTAJEIMPORTANCIA"];
             formula.PORCENTAJEACEPTACION = Request.Form["PORCENTAJEACEPTACION"];

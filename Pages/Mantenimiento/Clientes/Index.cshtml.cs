@@ -11,11 +11,13 @@ namespace PROYECTOBD1.Pages.Clientes
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
         public List<CiudadModelo> listaCiudades = new List<CiudadModelo>();
         public List<ClienteModelo> listaClientes = new List<ClienteModelo>();
-
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+        public Connection connection2 = new Connection();
+        String connectionString = "";
+      //  String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
 
         public void OnGet() 
         {
+            connectionString = connection2.ConnectionString;
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -87,6 +89,7 @@ namespace PROYECTOBD1.Pages.Clientes
         }
         public void OnPost()
         {
+            connectionString = connection2.ConnectionString;
             try
             {
                 pais = Request.Form["pais"];

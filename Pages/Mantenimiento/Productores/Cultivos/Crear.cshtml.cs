@@ -7,7 +7,9 @@ namespace PROYECTOBD1.Pages.Productores.Cultivos
 {
     public class CrearModel : PageModel
     {
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+        Connection connection2 = new Connection();
+      //  connectionString = connection2.ConnectionString;
+        String connectionString = "";
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
         public List<VariedadesModelo> listaVariedades = new List<VariedadesModelo>();
         public List<ProductorModelo> listaProductor = new List<ProductorModelo>();
@@ -19,6 +21,7 @@ namespace PROYECTOBD1.Pages.Productores.Cultivos
 
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -94,6 +97,7 @@ namespace PROYECTOBD1.Pages.Productores.Cultivos
         }
         public void OnPost()
         {
+            connectionString = connection2.ConnectionString;
             cultivosModelo.NOMBREPRODUCTOR = Request.Form["NOMBREPRODUCTOR"];
             cultivosModelo.NOMBREVARIEDAD = Request.Form["NOMBREVARIEDAD"];
             cultivosModelo.CALIBRE = Request.Form["CALIBRE"];

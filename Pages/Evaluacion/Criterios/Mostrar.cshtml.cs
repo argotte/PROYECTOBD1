@@ -7,10 +7,13 @@ namespace PROYECTOBD1.Pages.Evaluacion.Criterios
 {
     public class MostrarModel : PageModel
     {
+        Connection connection2 = new Connection();
+        // connectionString = connection2.ConnectionString;
+        String connectionString = "";
         public List<CriterioModelo> listaCri=new List<CriterioModelo>();
-        String connectionString = "Data Source=DESKTOP-P186VBB;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=12345678";
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))

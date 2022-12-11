@@ -7,7 +7,9 @@ namespace PROYECTOBD1.Pages.Clientes
 {
     public class CrearModel : PageModel
     {
-        String connectionString = "Data Source=DESKTOP-P186VBB;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=12345678";
+        public Connection connection2 = new Connection();
+        String connectionString = "";
+     //   String connectionString = "Data Source=DESKTOP-P186VBB;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=12345678";
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
         public List<CiudadModelo> listaCiudades = new List<CiudadModelo>();
         public ClienteModelo clienteModelo = new ClienteModelo();
@@ -21,6 +23,7 @@ namespace PROYECTOBD1.Pages.Clientes
         }
         public void OnPost()
         {
+            connectionString = connection2.ConnectionString;
             clienteModelo.NOMBRE = Request.Form["NOMBRE"];
             clienteModelo.FK_ID_PAIS = Request.Form["FK_ID_PAIS"];
             clienteModelo.FK_ID_CIUDAD = Request.Form["FK_ID_CIUDAD"];

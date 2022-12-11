@@ -7,14 +7,18 @@ namespace PROYECTOBD1.Pages.AsociacionesMenu.Asociaciones
 {
     public class IndexModel : PageModel
     {
+        Connection connection2 = new Connection();
+        String connectionString = "";
+     //   connectionString = connection2.ConnectionString;
         public List<RegionModelo> listaRegion = new List<RegionModelo>();
         public List<AsociacionesModelo> listaAsociacion = new List<AsociacionesModelo>();
         string error = "";
         string productor = "";
         public string idregion = "";
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+        
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -45,6 +49,7 @@ namespace PROYECTOBD1.Pages.AsociacionesMenu.Asociaciones
         }
         public void OnPost() 
         {
+            connectionString = connection2.ConnectionString;
             idregion = Request.Form["idregion"];
             try
             {

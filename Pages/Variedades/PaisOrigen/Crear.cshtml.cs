@@ -7,7 +7,10 @@ namespace PROYECTOBD1.Pages.PaisOrigen
 {
     public class CrearModel : PageModel
     {
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+        public Connection connection2 = new Connection();
+        String connectionString = "";
+        //connectionString = connection2.ConnectionString;
+        //String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
         public List<PaisModelo> listaPaises = new List<PaisModelo>();
         public List<CiudadModelo> listaCiudades = new List<CiudadModelo>();
         public ProductorModelo productorModelo = new ProductorModelo();
@@ -20,6 +23,7 @@ namespace PROYECTOBD1.Pages.PaisOrigen
         }
         public void OnPost()
         {
+            connectionString = connection2.ConnectionString;
             productorModelo.NOMBRE = Request.Form["NOMBRE"];
             productorModelo.ENVASE_ESTANDAR = Request.Form["ENVASE_ESTANDAR"];
             productorModelo.DIRECCION = Request.Form["DIRECCION"];

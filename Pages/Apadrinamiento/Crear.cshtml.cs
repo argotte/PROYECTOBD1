@@ -9,13 +9,17 @@ namespace PROYECTOBD1.Pages.Apadrinamiento
     {
        public string error = "";
         public string correcto = "";
-        String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
+     //   String connectionString = "Data Source=DIEGUITO;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=micontrasena";
         public List<VariedadesModelo> listaVariedades = new List<VariedadesModelo>();
         public List<PadrinosModelo> listaPadrinos = new List<PadrinosModelo>();
         public List<ProductorModelo> listaProductor = new List<ProductorModelo>();
         public string fechainicial, fechafinal, aporteanual,idpadrino,idproductor,idvariedad = "";
+        Connection connection2 = new Connection();
+        // connectionString = connection2.ConnectionString;
+        String connectionString = "";
         public void OnGet()
         {
+            connectionString = connection2.ConnectionString;
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -102,6 +106,7 @@ namespace PROYECTOBD1.Pages.Apadrinamiento
 
         public void OnPost() 
         {
+            connectionString = connection2.ConnectionString;
             idpadrino = Request.Form["idpadrino"];
             idproductor = Request.Form["idproductor"];
             idvariedad = Request.Form["idvariedad"];

@@ -7,7 +7,9 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
 {
     public class CrearModel : PageModel
     {
-        String connectionString = "Data Source=DESKTOP-P186VBB;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=12345678";
+        Connection connection2 = new Connection();
+        // connectionString = connection2.ConnectionString;
+        String connectionString = "";
         public List<ClienteModelo> listaClientes = new List<ClienteModelo>();
         public EvaluacionModelo evaluacion = new EvaluacionModelo();
         public string error = "";
@@ -19,6 +21,7 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
 
         public void OnPost()
         {
+            connectionString = connection2.ConnectionString;
             evaluacion.ANIO = Request.Form["ANIO"];
             evaluacion.FECHAEVALUACION = Request.Form["FECHAEVALUACION"];
             evaluacion.DECISIONFINAL = Request.Form["DECISIONFINAL"];
