@@ -1,0 +1,33 @@
+﻿@page
+@model PROYECTOBD1.Pages.Evaluacion.Evaluaciones.MostrarModel
+@{
+}
+<a class='btn btn-primary btn-sm' href='/Mantenimiento/Clientes/Crear'>Nuevo Cliente</a>
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>AÑO</th>
+            <th>FECHA DE EVALUACION</th>
+            <th>DECISION FINAL</th>
+            <th>RESULTADO</th>
+            <th>PORCENTAJE DEL RESULTADO</th>
+            <th>CLIENTE</th>
+            <th>PRODUCTOR</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.listaEva)
+        {
+            <tr>
+                <td>@item.ANIO</td>
+                <td>@item.FECHAEVALUACION</td>
+                <td>@item.DECISIONFINAL</td>
+                <td>@item.RESULTADO</td>
+                <td>@item.PORCENTAJE_RESULTADO</td>
+                <td>@item.NOMBRECLIENTE</td>
+                <td>@item.NOMBREPRODUCTOR</td>
+            </tr>
+        }
+    </tbody>
+</table>

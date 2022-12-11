@@ -1,0 +1,85 @@
+﻿@page
+@model PROYECTOBD1.Pages.Evaluacion.Evaluaciones.CrearModel
+@{
+}
+<br />
+<h2>NUEVO CLIENTE</h2>
+@if (Model.error.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.error</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='close'></button>
+    </div>
+}
+
+
+<form method="POST">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">AÑO</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="ANIO" value="@Model.evaluacion.ANIO">
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">FECHA DE EVALUACION</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="FECHAEVALUACION" value="@Model.evaluacion.FECHAEVALUACION">
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">DECISION FINAL</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="DECISIONFINAL" value="@Model.evaluacion.DECISIONFINAL">
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">RESULTADO</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="RESULTADO" value="@Model.evaluacion.RESULTADO">
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">PORCENTAJE DE RESULTADO</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="PORCENTAJE_RESULTADO" value="@Model.evaluacion.PORCENTAJE_RESULTADO">
+
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">CLIENTE</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="FK_ID_CLIENTE" value="@Model.evaluacion.FK_ID_CLIENTE">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">PRODUCTOR</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="FK_ID_PRODUCTOR" value="@Model.evaluacion.FK_ID_PRODUCTOR">
+        </div>
+    </div>
+
+    @if (Model.correcto.Length > 0)
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@Model.correcto</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row mb-3">
+        <div class="col-sm-5 d-grid">
+            <button type="submit" class="btn btn-primary">ACEPTA</button>
+        </div>
+        <div class="col-sm-5 d-grid">
+            <a class="btn btn-outline-primary" href="/" role="button">CANCELAR</a>
+        </div>
+
+    </div>
+</form>
