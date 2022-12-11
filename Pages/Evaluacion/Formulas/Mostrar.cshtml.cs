@@ -26,8 +26,8 @@ namespace PROYECTOBD1.Pages.Evaluacion.Formulas
                                 FormulaModelo formula=new FormulaModelo();
                                 formula.ID = (reader.IsDBNull(0) != true) ? "" + reader.GetInt32(0) : "";
                                 formula.TIPO = (reader.IsDBNull(1) != true) ? "" + reader.GetString(1) : "";
-                                formula.PORCENTAJE_IMPORTANCIA = (reader.IsDBNull(2) != true) ? "" + reader.GetInt32(2) : "";
-                                formula.PORCENTAJE_ACEPTACION = (reader.IsDBNull(3) != true) ? "" + reader.GetInt32(3) : "";
+                                formula.PORCENTAJEIMPORTANCIA = (reader.IsDBNull(2) != true) ? "" + reader.GetInt32(2) : "";
+                                formula.PORCENTAJEACEPTACION = (reader.IsDBNull(3) != true) ? "" + reader.GetInt32(3) : "";
                                 formula.FK_ID_CLIENTE = (reader.IsDBNull(4) != true) ? "" + reader.GetInt32(4) : "";
                                 formula.FK_ID_CRITERIO = (reader.IsDBNull(5) != true) ? "" + reader.GetInt32(5) : "";
                                 //       paisModelo.Ciudades= new List<CiudadModelo>();
