@@ -81,7 +81,7 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
             }
             //ahora salva la info en la bd
             evaluacion.ANIO = ""; evaluacion.FECHAEVALUACION = ""; evaluacion.DECISIONFINAL = ""; evaluacion.RESULTADO = ""; evaluacion.PORCENTAJE_RESULTADO = ""; evaluacion.NOMBRECLIENTE = ""; evaluacion.NOMBREPRODUCTOR = "";
-            correcto = "CLIENTE AGREGADO CORRECTAMENTE";
+            correcto = "EVALUACION AGREGADA CORRECTAMENTE";
             Response.Redirect("/Mantenimiento/Clientes/Index");
         }
     }
