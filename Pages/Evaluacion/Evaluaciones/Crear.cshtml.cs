@@ -12,7 +12,7 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
         public EvaluacionModelo evaluacion = new EvaluacionModelo();
         public string error = "";
         public string correcto = "";
-        public string cliente;
+        public string cliente,prod;
         public void OnGet()
         {
         }
@@ -24,9 +24,9 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
             evaluacion.DECISIONFINAL = Request.Form["DECISIONFINAL"];
             evaluacion.RESULTADO = Request.Form["RESULTADO"];
             evaluacion.PORCENTAJE_RESULTADO = Request.Form["PORCENTAJE_RESULTADO"];
-            evaluacion.FK_ID_CLIENTE = Request.Form["FK_ID_CLIENTE"];
-            evaluacion.FK_ID_PRODUCTOR = Request.Form["FK_ID_PRODUCTOR"];
-            if (evaluacion.FK_ID_CLIENTE.Length == 0 || evaluacion.FK_ID_PRODUCTOR.Length == 0 || evaluacion.ANIO.Length == 0 || evaluacion.FECHAEVALUACION.Length == 0 || evaluacion.DECISIONFINAL.Length == 0 || evaluacion.RESULTADO.Length == 0 || evaluacion.PORCENTAJE_RESULTADO.Length == 0)
+            evaluacion.NOMBRECLIENTE = Request.Form["NOMBRECLIENTE"];
+            evaluacion.NOMBREPRODUCTOR = Request.Form["NOMBREPRODUCTOR"];
+            if (evaluacion.NOMBRECLIENTE.Length == 0 || evaluacion.NOMBREPRODUCTOR.Length == 0 || evaluacion.ANIO.Length == 0 || evaluacion.FECHAEVALUACION.Length == 0 || evaluacion.DECISIONFINAL.Length == 0 || evaluacion.RESULTADO.Length == 0 || evaluacion.PORCENTAJE_RESULTADO.Length == 0)
             {
                 error = "TODOS LOS CAMPOS SON REQUERIDOS";
                 return;
@@ -36,18 +36,18 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "SELECT P.ID,C.ID FROM DJR_PAISES AS P INNER JOIN DJR_CIUDADES C ON P.ID=C.FK_ID_PAIS WHERE P.NOMBRE= @PAIS AND C.NOMBRE= @CIUDAD";
+                    String sql = "SELECT C.ID,P.ID FROM DJR_CLIENTES C, DJR_PRODUCTORES P WHERE P.NOMBRE= @PRODUCTOR AND C.NOMBRE= @CLIENTE";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@PAIS", clienteModelo.FK_ID_PAIS);
-                        command.Parameters.AddWithValue("@CIUDAD", clienteModelo.FK_ID_CIUDAD);
+                        command.Parameters.AddWithValue("@CLIENTE", evaluacion.NOMBRECLIENTE);
+                        command.Parameters.AddWithValue("@PRODUCTOR", evaluacion.NOMBREPRODUCTOR);
                         // command.ExecuteNonQuery();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                pais = "" + reader.GetInt32(0);
-                                ciudad = "" + reader.GetInt32(1);
+                                cliente = "" + reader.GetInt32(0);
+                                prod = "" + reader.GetInt32(1);
                             }
                         }
                     }
@@ -61,9 +61,13 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
                                 "(@NOMBRE,@FK_ID_PAIS,@FK_ID_CIUDAD);";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@NOMBRE", clienteModelo.NOMBRE);
-                        command.Parameters.AddWithValue("@FK_ID_PAIS", pais);
-                        command.Parameters.AddWithValue("@FK_ID_CIUDAD", ciudad);
+                        command.Parameters.AddWithValue("@ANIO", evaluacion.ANIO);
+                        command.Parameters.AddWithValue("@FECHAEVALUACION", evaluacion.FECHAEVALUACION);
+                        command.Parameters.AddWithValue("@DECISIONFINAL", evaluacion.DECISIONFINAL);
+                        command.Parameters.AddWithValue("@RESULTADO", evaluacion.RESULTADO);
+                        command.Parameters.AddWithValue("@PORCENTAJE_RESULTADO", evaluacion.PORCENTAJE_RESULTADO);
+                        command.Parameters.AddWithValue("@FK_ID_CLIENTE", cliente);
+                        command.Parameters.AddWithValue("@FK_ID_PRODUCTOR", prod);
                         command.ExecuteNonQuery();
                     }
 
@@ -76,7 +80,7 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
 
             }
             //ahora salva la info en la bd
-            clienteModelo.NOMBRE = ""; clienteModelo.FK_ID_CIUDAD = ""; clienteModelo.FK_ID_PAIS = "";
+            evaluacion.ANIO = ""; evaluacion.FECHAEVALUACION = ""; evaluacion.DECISIONFINAL = ""; evaluacion.RESULTADO = ""; evaluacion.PORCENTAJE_RESULTADO = ""; evaluacion.NOMBRECLIENTE = ""; evaluacion.NOMBREPRODUCTOR = "";
             correcto = "CLIENTE AGREGADO CORRECTAMENTE";
             Response.Redirect("/Mantenimiento/Clientes/Index");
         }
