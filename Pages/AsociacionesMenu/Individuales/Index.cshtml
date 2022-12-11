@@ -1,0 +1,36 @@
+﻿@page
+@model PROYECTOBD1.Pages.AsociacionesMenu.Individuales.IndexModel
+@{
+}
+<br />
+<h2>INFORMACION DE ASOCIACION DE PRODUCTOR CON PROVEEDOR</h2>
+<form method="post">
+    <h6 class="text-center">
+        <hr />
+        @*                                                                             CUAL TOMA,CUAL MUESTRA*@
+        <select id="Select1" name="idproductor" asp-items="@(new SelectList(Model.listaProductor,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR PRODUCTOR</option>
+        </select>
+
+        <input type="submit" value="ACEPTAR" />
+    </h6>
+</form>
+<a class='btn btn-primary btn-sm' href='/AsociacionesMenu/Individuales/Crear'>Nueva relación</a>
+
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>NOMBRE DE PROVEEDOR</th>
+            <th>NOMBRE DE PRODUCTOR</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listapp)
+        {
+            <tr>
+                <td>@item.NOMBREPROVEEDOR</td>
+                <td>@item.NOMBREPRODUCTOR</td>
+            </tr>
+        }
+    </tbody>
+</table>

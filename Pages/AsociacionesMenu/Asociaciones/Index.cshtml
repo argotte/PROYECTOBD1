@@ -1,0 +1,36 @@
+﻿@page
+@model PROYECTOBD1.Pages.AsociacionesMenu.Asociaciones.IndexModel
+@{
+}
+<br />
+<h2>INFORMACION DE ASOCIACIONES</h2>
+<form method="post">
+    <h6 class="text-center">
+        <hr />
+        @*                                                                             CUAL TOMA,CUAL MUESTRA*@
+        <select id="Select1" name="idregion" asp-items="@(new SelectList(Model.listaRegion,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR REGION</option>
+        </select>
+
+        <input type="submit" value="ACEPTAR" />
+    </h6>
+</form>
+<a class='btn btn-primary btn-sm' href='/AsociacionesMenu/Asociaciones/Crear'>Nueva asociación</a>
+
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>REGION</th>
+            <th>NOMBRE DE ASOCIACION</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaAsociacion)
+        {
+            <tr>
+                <td>@item.NOMBREREGION</td>
+                <td>@item.NOMBRE</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -38,7 +38,7 @@ namespace PROYECTOBD1.Pages.Proveedores
                         }
                     }
                 }
-                //CiudadModelo ciudadModelo = new CiudadModelo();
+                //PadrinosModelo ciudadModelo = new PadrinosModelo();
 
             }
             catch (Exception)

@@ -30,13 +30,13 @@ namespace PROYECTOBD1.Pages.Proveedores
                                 paisModelo.ID = "" + reader.GetInt32(0);
                                 paisModelo.NOMBRE = reader.GetString(1);
                                 paisModelo.CONTINENTE = reader.GetString(2);
-                                //       paisModelo.Ciudades= new List<CiudadModelo>();
+                                //       paisModelo.Ciudades= new List<PadrinosModelo>();
                                 listaPaises.Add(paisModelo);
                             }
                         }
                     }
                 }
-                //CiudadModelo ciudadModelo = new CiudadModelo();
+                //PadrinosModelo ciudadModelo = new PadrinosModelo();
 
             }
             catch (Exception)
@@ -74,7 +74,7 @@ namespace PROYECTOBD1.Pages.Proveedores
                             }
                         }
                     }
-                    //CiudadModelo ciudadModelo = new CiudadModelo();
+                    //PadrinosModelo ciudadModelo = new PadrinosModelo();
 
                 }
                 catch (Exception)

@@ -47,7 +47,7 @@ namespace PROYECTOBD1.Pages.Productores.Cultivos
                         }
                     }
                 }
-                //CiudadModelo ciudadModelo = new CiudadModelo();
+                //PadrinosModelo ciudadModelo = new PadrinosModelo();
 
             }
             catch (Exception ex)
@@ -83,7 +83,7 @@ namespace PROYECTOBD1.Pages.Productores.Cultivos
                         }
                     }
                 }
-                //CiudadModelo ciudadModelo = new CiudadModelo();
+                //PadrinosModelo ciudadModelo = new PadrinosModelo();
 
             }
             catch (Exception ex)
