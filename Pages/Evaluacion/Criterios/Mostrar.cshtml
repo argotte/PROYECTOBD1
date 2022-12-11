@@ -1,0 +1,27 @@
+﻿@page
+@model PROYECTOBD1.Pages.Evaluacion.Criterios.MostrarModel
+@{
+}
+<a class='btn btn-primary btn-sm' href='/Evaluacion/Criterios/Crear'>Nuevo Criterio</a>
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>DESCRIPCION</th>
+            <th>TIPO</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.listaCri)
+        {
+            <tr>
+                <td>@item.ID</td>
+                <td>@item.NOMBRE</td>
+                <td>@item.DESCRIPCION</td>
+                <td>@item.TIPO</td>
+            </tr>
+        }
+    </tbody>
+</table>
