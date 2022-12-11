@@ -56,9 +56,9 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "INSERT INTO DJR_CLIENTES" +
-                                "(NOMBRE,FK_ID_PAIS,FK_ID_CIUDAD) VALUES" +
-                                "(@NOMBRE,@FK_ID_PAIS,@FK_ID_CIUDAD);";
+                    String sql = "INSERT INTO DJR_EVALUACIONES" +
+                                "(ANIO,FECHAEVALUACION,DECISIONFINAL,RESULTADO,PORCENTAJE_RESULTADO,FK_ID_CLIENTE,FK_ID_PRODUCTOR) VALUES" +
+                                "(@ANIO,@FECHAEVALUACION,@DECISIONFINAL,@RESULTADO,@PORCENTAJE_RESULTADO,@FK_ID_CLIENTE,@FK_ID_PRODUCTOR);";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@ANIO", evaluacion.ANIO);
@@ -82,7 +82,7 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
             //ahora salva la info en la bd
             evaluacion.ANIO = ""; evaluacion.FECHAEVALUACION = ""; evaluacion.DECISIONFINAL = ""; evaluacion.RESULTADO = ""; evaluacion.PORCENTAJE_RESULTADO = ""; evaluacion.NOMBRECLIENTE = ""; evaluacion.NOMBREPRODUCTOR = "";
             correcto = "EVALUACION AGREGADA CORRECTAMENTE";
-            Response.Redirect("/Mantenimiento/Clientes/Index");
+            Response.Redirect("/Evaluacion/Evaluaciones/Mostrar");
         }
     }
 }
