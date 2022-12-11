@@ -37,6 +37,30 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
                         }
                     }
                 }
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    String sql = "SELECT C.NOMBRE,P.NOMBRE FROM DJR_CLIENTES C, DJR_PRODUCTORES P WHERE P.ID= @PRODUCTOR AND C.ID= @CLIENTE";
+                    foreach (var item in listaEva)
+                    {
+
+
+                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        {
+                            command.Parameters.AddWithValue("@CLIENTE", item.FK_ID_CLIENTE);
+                            command.Parameters.AddWithValue("@PRODUCTOR", item.FK_ID_PRODUCTOR);
+                            // command.ExecuteNonQuery();
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    item.NOMBRECLIENTE = "" + reader.GetString(0);
+                                    item.NOMBREPRODUCTOR = "" + reader.GetString(1);
+                                }
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception)
             {

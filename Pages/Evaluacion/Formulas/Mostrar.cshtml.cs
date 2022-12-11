@@ -36,6 +36,30 @@ namespace PROYECTOBD1.Pages.Evaluacion.Formulas
                         }
                     }
                 }
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    String sql = "SELECT C.NOMBRE,P.NOMBRE FROM DJR_CLIENTES C, DJR_CRITERIOS_VAR P WHERE P.ID= @CRITERIO AND C.ID= @CLIENTE";
+                    foreach (var item in listaFor){
+
+                    
+                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        {
+                            command.Parameters.AddWithValue("@CLIENTE", item.FK_ID_CLIENTE);
+                            command.Parameters.AddWithValue("@CRITERIO", item.FK_ID_CRITERIO);
+                            // command.ExecuteNonQuery();
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    item.NOMBRECLIENTE = "" + reader.GetString(0);
+                                    item.NOMBRECRITERIO = "" + reader.GetString(1);
+                                }
+                        }
+                    }
+                    }
+                }
             }
             catch (Exception)
             {
