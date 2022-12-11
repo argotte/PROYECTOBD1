@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Evaluacion\Formulas\" />
     <Folder Include="Pages\Variedades\PrecioVariedad\" />
   </ItemGroup>
 
