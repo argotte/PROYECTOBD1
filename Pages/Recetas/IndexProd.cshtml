@@ -7,7 +7,6 @@
 <form method="post">
     <h2>LISTA DE PRODUCTORES</h2>
     <h1 class="text-center">
-        <h2>SELECCIONA UN PAIS</h2>
         <hr />
         @*                                                                             CUAL TOMA,CUAL MUESTRA*@
         <select id="Select1" name="productor" asp-items="@(new SelectList(Model.listaProductor,"ID","NOMBRE"))">
@@ -16,7 +15,7 @@
         <input type="submit" value="ACEPTAR" />
     </h1>
 </form>
-<a class='btn btn-primary btn-sm' href='/Recetas/Opcion'>Nueva receta</a>
+<a class='btn btn-primary btn-sm' href='/Recetas/Productor/IndexP'>Nueva receta</a>
 <table class="table">
     <thead>
         <tr>
