@@ -11,6 +11,8 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
        // connectionString = connection2.ConnectionString;
         String connectionString = "";
         public List<EvaluacionModelo> listaEva = new List<EvaluacionModelo>();
+        public List<ClienteModelo> listaClientes = new List<ClienteModelo>();
+        public string cliente;
 
         public void OnGet()
         {
@@ -21,28 +23,31 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "SELECT E.ANIO,E.FECHAEVALUACION, E.DECISIONFINAL,E.RESULTADO,E.PORCENTAJE_RESULTADO,E.FK_ID_PRODUCTOR, E.FK_ID_CLIENTE FROM DJR_EVALUACIONES E";
+                    String sql = "SELECT C.ID,C.NOMBRE FROM DJR_CLIENTES AS C";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                EvaluacionModelo evaluacion = new EvaluacionModelo();
-                                evaluacion.ANIO= (reader.IsDBNull(0) != true) ? "" + reader.GetString(0) : "";
-                                evaluacion.FECHAEVALUACION = (reader.IsDBNull(1) != true) ? "" + reader.GetDateTime(1) : "";
-                                evaluacion.DECISIONFINAL = (reader.IsDBNull(2) != true) ? "" + reader.GetString(2) : "";
-                                evaluacion.RESULTADO = (reader.IsDBNull(3) != true) ? "" + reader.GetString(3) : "";
-                                evaluacion.PORCENTAJE_RESULTADO = (reader.IsDBNull(4) != true) ? "" + reader.GetDecimal(4) : "";
-                                evaluacion.FK_ID_PRODUCTOR = (reader.IsDBNull(5) != true) ? "" + reader.GetInt32(5) : "";
-                                evaluacion.FK_ID_CLIENTE = (reader.IsDBNull(6) != true) ? "" + reader.GetInt32(6) : "";
-                                //       paisModelo.Ciudades= new List<CiudadModelo>();
-                                listaEva.Add(evaluacion);
+                                ClienteModelo cliente = new ClienteModelo();
+                                cliente.ID  =   (reader.IsDBNull(0) != true) ? "" + reader.GetInt32(0) : "";
+                                cliente.NOMBRE  = (reader.IsDBNull(1) != true) ? "" + reader.GetString(1) : "";
+                                listaClientes.Add(cliente);
+                                /* EvaluacionModelo evaluacion = new EvaluacionModelo();
+                                 evaluacion.ANIO= (reader.IsDBNull(0) != true) ? "" + reader.GetString(0) : "";
+                                 evaluacion.FECHAEVALUACION = (reader.IsDBNull(1) != true) ? "" + reader.GetDateTime(1) : "";
+                                 evaluacion.DECISIONFINAL = (reader.IsDBNull(2) != true) ? "" + reader.GetString(2) : "";
+                                 evaluacion.RESULTADO = (reader.IsDBNull(3) != true) ? "" + reader.GetString(3) : "";
+                                 evaluacion.PORCENTAJE_RESULTADO = (reader.IsDBNull(4) != true) ? "" + reader.GetDecimal(4) : "";
+                                 evaluacion.FK_ID_PRODUCTOR = (reader.IsDBNull(5) != true) ? "" + reader.GetInt32(5) : "";
+                                 evaluacion.FK_ID_CLIENTE = (reader.IsDBNull(6) != true) ? "" + reader.GetInt32(6) : "";
+                                 listaEva.Add(evaluacion);*/
                             }
                         }
                     }
                 }
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                /*using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     String sql = "SELECT C.NOMBRE,P.NOMBRE FROM DJR_CLIENTES C, DJR_PRODUCTORES P WHERE P.ID= @PRODUCTOR AND C.ID= @CLIENTE";
@@ -65,13 +70,58 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
                             }
                         }
                     }
-                }
+                }*/
             }
             catch (Exception)
             {
 
                 throw;
             }
+        }
+
+        public void OnPost()
+        {
+            connectionString = connection2.ConnectionString;
+            try
+            {
+                cliente = Request.Form["cliente"];
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    String sql = "SELECT E.ANIO,E.FECHAEVALUACION,E.DECISIONFINAL,E.RESULTADO,E.PORCENTAJE_RESULTADO, E.FK_ID_CLIENTE, E.FK_ID_PRODUCTOR " +
+                                 "FROM DJR_EVALUACIONES AS E " +
+                                 //"INNER JOIN DJR_CLIENTES AS C ON E.FK_ID_CLIENTE=C.ID" +,P.NOMBRE, C.NOMBRE 
+                                 //"INNER JOIN DJR_PRODUCTORES AS P ON E.FK_ID_PRODUCTOR=P.ID" +
+                                 "WHERE E.ANIO=2019";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        //command.Parameters.AddWithValue("@CLIENTE", cliente);
+                        //Console.WriteLine(cliente);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            //      command.Parameters.AddWithValue("@PAIS", pais);
+
+                            while (reader.Read())
+                            {
+                                EvaluacionModelo evaluacion = new EvaluacionModelo();
+                                evaluacion.ANIO = (reader.IsDBNull(0) != true) ? "" + reader.GetString(0) : "";
+                                evaluacion.FECHAEVALUACION = (reader.IsDBNull(1) != true) ? "" + reader.GetDateTime(1) : "";
+                                evaluacion.DECISIONFINAL = (reader.IsDBNull(2) != true) ? "" + reader.GetString(2) : "";
+                                evaluacion.RESULTADO = (reader.IsDBNull(3) != true) ? "" + reader.GetString(3) : "";
+                                evaluacion.PORCENTAJE_RESULTADO = (reader.IsDBNull(4) != true) ? "" + reader.GetDecimal(4) : "";
+                                evaluacion.FK_ID_PRODUCTOR = (reader.IsDBNull(5) != true) ? "" + reader.GetInt32(5) : "";
+                                evaluacion.FK_ID_CLIENTE = (reader.IsDBNull(6) != true) ? "" + reader.GetInt32(6) : "";
+                                listaEva.Add(evaluacion);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: " + ex.Message);
+            }
+            OnGet();
         }
     }
 }
