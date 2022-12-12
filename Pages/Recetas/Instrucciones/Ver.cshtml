@@ -1,0 +1,25 @@
+﻿@page
+@model PROYECTOBD1.Pages.Recetas.VerModel
+@{
+}
+<br>
+<h2>Lista de pasos por receta</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>NOMBRE DE RECETA</th>
+            <th>PASO</th>
+            <th>DESCRIPCION</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listInstrucciones)
+        {
+                    <tr>
+                        <td>@item.NOMBRERECETA</td>
+                        <td>@item.PASO</td>
+                        <td>@item.DESCRIPCION</td>
+                    </tr>
+        }
+        </tbody>
+</table>
