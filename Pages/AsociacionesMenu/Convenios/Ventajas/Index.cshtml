@@ -1,0 +1,36 @@
+﻿@page
+@model PROYECTOBD1.Pages.AsociacionesMenu.Convenios.Ventajas.IndexModel
+@{
+}
+<br />
+<h2>CONVENIOS</h2>
+@if (Model.error.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.error</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='close'></button>
+    </div>
+}
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+
+                <td>VENTAJA</td>
+                <td>PORCENTAJE DE DESCUENTO</td>
+                <td></td>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaVentaja)
+        {
+            <tr>
+
+                    <td>@item.NOMBRE</td>
+                <td>@item.PORCENTAJEDESCUENTO %</td>
+                    <td></td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

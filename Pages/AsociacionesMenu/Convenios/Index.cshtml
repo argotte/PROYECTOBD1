@@ -1,0 +1,69 @@
+﻿@page
+@model PROYECTOBD1.Pages.AsociacionesMenu.Convenios.Index
+@{
+}
+<br />
+<h2>CONVENIOS</h2>
+@if (Model.error.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.error</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='close'></button>
+    </div>
+}
+
+
+<form method="POST">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">PRECOCIDAD</label>
+        <select id="Select4" name="combobox">
+            <option value="" selected disabled>SELECCIONAR TIPO DE CONVENIO</option>
+            <option value="ASOCIACION">POR ASOCIACION</option>
+            <option value="PRODUCTOR">POR PRODUCTOR</option>
+        </select>
+        <input type="submit" value="ACEPTAR" />
+    </div>
+</form>
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+              @if (Model.boolproductor==true)
+            {
+                <td>PRODUCTOR</td>
+                <td>PROVEEDOR</td>
+                <td>FECHA DE INICIO</td>
+                <td>ESTADO VIGENCIA</td>
+                <td></td>
+            }
+            else
+            {
+                <td>ASOCIACION</td>
+                <td>FECHA DE INICIO</td>
+                <td>ESTADO DE VIGENCIA</td>
+                <td></td>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaConvenios)
+        {
+            <tr>
+                @if (Model.boolproductor==true)
+                {
+                    <td>@item.NOMBREPRODUCTORPP</td>
+                    <td>@item.NOMBREPROVEEDORPP</td>
+                    <td>@item.FECHAINICIO</td>
+                    <td>@item.ESTADO_VIGENCIA</td>
+                    <td><a class="btn btn-primary btn-sm" href="/AsociacionesMenu/Convenios/Ventajas/Index?id=@item.ID">VENTAJAS</a></td>
+                }
+                else
+                {     
+                    <td>@item.NOMBREASOCIACION</td>
+                    <td>@item.FECHAINICIO</td>
+                    <td>@item.ESTADO_VIGENCIA</td>
+                    <td><a class="btn btn-primary btn-sm" href="/AsociacionesMenu/Convenios/Ventajas/Index?id=@item.ID">VENTAJAS</a></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
