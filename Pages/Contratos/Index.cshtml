@@ -3,7 +3,8 @@
 @{
 }
 <br />
-<h2>INFORMACION DE ASOCIACION DE PRODUCTOR CON PROVEEDOR</h2>
+<h2>CONSULTA DE CONTRATOS</h2>
+<a class='btn btn-primary btn-sm' href='/Contratos/Crear'>Nuevo Contrato</a>
 <form method="post">
     <h6 class="text-center">
         <hr />
@@ -18,7 +19,7 @@
         <input type="submit" value="ACEPTAR" />
     </h6>
 </form>
-<a class='btn btn-primary btn-sm' href='/Contratos/Crear'>Nuevo Contrato</a>
+
 
 <table id="myTable" class="table table-bordered table-hover table-sm">
     <thead>
@@ -28,8 +29,8 @@
             <th>FECHA DE EMISIÓN</th>
             <th>PORCENTAJE DE DESCUENTO</th>
             <th>TOTAL</th>
-
-
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -41,7 +42,12 @@
                 <td>@item.FECHA_EMITIDO</td>
                 <td>@item.PORCENTAJEDESCUENTO%</td>
                 <td>$@item.TOTAL</td>
-
+                <th>
+                    <a class="btn btn-primary btn-sm" href="/Contratos/Renovaciones/Index?id=@item.ID">RENOVACIONES</a>
+                </th>
+                <th>
+                    <a class="btn btn-primary btn-sm" href="/Contratos/DetalleContratos/Index?id=@item.ID">DETALLES</a>
+                </th>
             </tr>
         }
     </tbody>
