@@ -15,20 +15,20 @@
 
             <td>NOMBRE CLIENTE</td>
             <td>NOMBRE PRODUCTOR</td>
-            <td>FECHA DE PAGO</td>
-            <td>MONTO</td>
+            <td>FECHA DE ENVIO</td>
+            <td>KILOGRAMOS</td>
 
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.listaPago)
+        @foreach (var item in Model.listaEnvio)
         {
                 <tr>
 
                     <td>@item.NOMBRECLIENTE</td>
                     <td>@item.NOMBREPRODUCTOR</td>
                     <td>@item.FECHA</td>
-                    <td>$@item.MONTO_DOLARES</td>
+                    <td>@item.KG KG</td>
 
                 </tr>
         }

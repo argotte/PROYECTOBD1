@@ -28,7 +28,7 @@
             <th>COLOR</th>
             <th>ESPECIE</th>
             <th>DESCRIPCION</th>
-            .
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -42,6 +42,12 @@
                 <td>@item.COLOR</td>
                 <td>@item.ESPECIE</td>
                 <td>@item.DESCRIPCION</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Variedades/PaisOrigen/Index?id=@item.ID">OTROS PAISES DE ORIGEN</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Contratos/DetalleContratos/CondicionPago/Index?id=@item.ID">PRECIO</a>
+                </td>
             </tr>
         }
     </tbody>
