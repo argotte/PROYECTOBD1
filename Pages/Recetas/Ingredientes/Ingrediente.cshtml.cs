@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace PROYECTOBD1.Pages.Recetas.Ingredientes
 {
-    public class IngredientesModel : PageModel
+    public class IngredienteModel : PageModel
     {
         public IngredienteModelo ingrediente = new IngredienteModelo();
         public List<IngredienteModelo> listIngredientes = new List<IngredienteModelo>();
