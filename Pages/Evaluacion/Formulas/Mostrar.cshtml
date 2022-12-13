@@ -2,6 +2,19 @@
 @model PROYECTOBD1.Pages.Evaluacion.Formulas.MostrarModel
 @{
 }
+<br />
+<form method="post">
+    <h1 class="text-center">
+        <h2>SELECCIONA UN CLIENTE</h2>
+        <hr />
+        @*                                                                             CUAL TOMA,CUAL MUESTRA*@
+        <select id="Select2" name="cliente" asp-items="@(new SelectList(Model.listaClientes,"NOMBRE","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR CLIENTE</option>
+        </select>
+
+        <input type="submit" value="ACEPTAR" />
+    </h1>
+</form>
 <a class='btn btn-primary btn-sm' href='/Evaluacion/Formulas/Crear'>Nueva Formula</a>
 <table id="myTable" class="table table-bordered table-hover table-sm">
     <thead>
