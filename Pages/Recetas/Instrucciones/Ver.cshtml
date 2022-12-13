@@ -10,6 +10,7 @@
             <th>NOMBRE DE RECETA</th>
             <th>PASO</th>
             <th>DESCRIPCION</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,10 @@
                         <td>@item.NOMBRERECETA</td>
                         <td>@item.PASO</td>
                         <td>@item.DESCRIPCION</td>
+                        <td>
+                     <a class="btn btn-primary btn-sm" href="/Recetas/Instrucciones/Anadir?id=@item.FK_ID_RECETA">AÑADIR PASO</a>
+
+                        </td>
                     </tr>
         }
         </tbody>

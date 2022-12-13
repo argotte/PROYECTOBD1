@@ -15,6 +15,7 @@ namespace PROYECTOBD1.Pages.AsociacionesMenu.Asociaciones
         string error = "";
         string productor = "";
         public string idregion = "";
+        bool repetir = false;
         
         public void OnGet()
         {
@@ -56,21 +57,26 @@ namespace PROYECTOBD1.Pages.AsociacionesMenu.Asociaciones
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "SELECT A.ID,A.NOMBRE, R.NOMBRE FROM DJR_ASOCIACIONES AS A " +
+                    String sql = "SELECT A.ID,A.NOMBRE, R.NOMBRE,PROD.NOMBRE FROM DJR_ASOCIACIONES AS A " +
                                  "INNER JOIN DJR_REGIONES AS R ON R.ID=A.FK_ID_REGION " +
+                                 "INNER JOIN DJR_P_A AS P ON P.FK_ID_ASOCIACION=A.ID  " +
+                                 "INNER JOIN DJR_PRODUCTORES PROD ON PROD.ID=P.FK_ID_PRODUCTOR " +
                                  "WHERE R.ID=@IDREGION";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@IDREGION", idregion);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
+                            repetir = true;
                             while (reader.Read())
                             {
                                 AsociacionesModelo asociacionesModelo = new AsociacionesModelo();
                                 asociacionesModelo.ID = ""+reader.GetInt32(0);
                                 asociacionesModelo.NOMBRE= reader.GetString(1);
                                 asociacionesModelo.NOMBREREGION=reader.GetString(2);
+                                asociacionesModelo.NOMBREPRODUCTOR = reader.GetString(3);
                                 listaAsociacion.Add(asociacionesModelo);
+                                repetir = false;
                             }
                         }
                     }
@@ -82,6 +88,42 @@ namespace PROYECTOBD1.Pages.AsociacionesMenu.Asociaciones
 
                 error = ex.Message;
                 OnGet();
+            }
+            if (repetir==true)
+            {
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        String sql = "SELECT A.ID,A.NOMBRE, R.NOMBRE FROM DJR_ASOCIACIONES AS A " +
+                                     "INNER JOIN DJR_REGIONES AS R ON R.ID=A.FK_ID_REGION " +
+                                     "WHERE R.ID=@IDREGION";
+                        using (SqlCommand command = new SqlCommand(sql, connection))
+                        {
+                            command.Parameters.AddWithValue("@IDREGION", idregion);
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                repetir = true;
+                                while (reader.Read())
+                                {
+                                    AsociacionesModelo asociacionesModelo = new AsociacionesModelo();
+                                    asociacionesModelo.ID = "" + reader.GetInt32(0);
+                                    asociacionesModelo.NOMBRE = reader.GetString(1);
+                                    asociacionesModelo.NOMBREREGION = reader.GetString(2);
+                                    listaAsociacion.Add(asociacionesModelo);
+                                }
+                            }
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    error = ex.Message;
+                    OnGet();
+                }
             }
             OnGet();
 
