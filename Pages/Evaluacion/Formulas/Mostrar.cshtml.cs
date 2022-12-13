@@ -89,10 +89,10 @@ namespace PROYECTOBD1.Pages.Evaluacion.Formulas
                 {
                     connection.Open();
                     String sql = "SELECT F.ID, F.TIPO, F.PORCENTAJEIMPORTANCIA, F.PORCENTAJEACEPTACION, F.FK_ID_CLIENTE, F.FK_ID_CRITERIO_VAR, C.NOMBRE, P.NOMBRE " +
-                                 "FROM DJR_FORMULAS AS F, DJR_CLIENTES AS C, DJR_CRITERIOS_VAR AS P " +
-                                 //"INNER JOIN DJR_CLIENTES AS C ON E.FK_ID_CLIENTE=C.ID" + 
-                                 //"INNER JOIN DJR_PRODUCTORES AS P ON E.FK_ID_PRODUCTOR=P.ID" +
-                                 "WHERE F.FK_ID_CLIENTE=C.ID AND F.FK_ID_CRITERIO_VAR=P.ID AND C.NOMBRE=@CLIENTE ";
+                                 "FROM DJR_FORMULAS AS F " +
+                                 "INNER JOIN DJR_CLIENTES AS C ON F.FK_ID_CLIENTE=C.ID " + 
+                                 "INNER JOIN DJR_CRITERIOS_VAR AS P ON F.FK_ID_CRITERIO_VAR=P.ID " +
+                                 "WHERE C.NOMBRE=@CLIENTE ";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@CLIENTE", cliente);

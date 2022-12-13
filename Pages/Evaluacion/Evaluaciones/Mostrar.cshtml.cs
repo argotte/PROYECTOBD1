@@ -89,14 +89,14 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
                 {
                     connection.Open();
                     String sql = "SELECT E.ANIO,E.FECHAEVALUACION,E.DECISIONFINAL,E.RESULTADO,E.PORCENTAJE_RESULTADO, E.FK_ID_CLIENTE, E.FK_ID_PRODUCTOR, C.NOMBRE,P.NOMBRE " +
-                                 "FROM DJR_EVALUACIONES AS E,DJR_CLIENTES AS C, DJR_PRODUCTORES AS P " +
-                                 //"INNER JOIN DJR_CLIENTES AS C ON E.FK_ID_CLIENTE=C.ID" + 
-                                 //"INNER JOIN DJR_PRODUCTORES AS P ON E.FK_ID_PRODUCTOR=P.ID" +
-                                 "WHERE E.FK_ID_CLIENTE=C.ID AND E.FK_ID_PRODUCTOR=P.ID AND C.NOMBRE=@CLIENTE ";
+                                 "FROM DJR_EVALUACIONES AS E " +
+                                 "INNER JOIN DJR_CLIENTES AS C ON E.FK_ID_CLIENTE=C.ID " + 
+                                 "INNER JOIN DJR_PRODUCTORES AS P ON E.FK_ID_PRODUCTOR=P.ID " +
+                                 "WHERE C.NOMBRE=@CLIENTE ";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@CLIENTE", cliente);
-                        //Console.WriteLine(cliente);
+                        //Console.WriteLine(cliente);,DJR_CLIENTES AS C, DJR_PRODUCTORES AS P / E.FK_ID_CLIENTE=C.ID AND E.FK_ID_PRODUCTOR=P.ID AND 
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             //      command.Parameters.AddWithValue("@PAIS", pais);
