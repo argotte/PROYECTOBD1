@@ -34,7 +34,7 @@ namespace PROYECTOBD1.Pages.AsociacionesMenu.Convenios
                 }
                 else
                 {
-                    combobox = "select C.ID, ASO.NOMBRE,C.FECHAINICIO,C.ESTADO_VIGENCIA  from djr_convenios as C inner join DJR_ASOCIACIONES AS ASO on C.FK_ID_ASOCIACION=ASO.ID";
+                    combobox = "select C.ID, ASO.NOMBRE,PROV.NOMBRE,C.FECHAINICIO,C.ESTADO_VIGENCIA  from djr_convenios as C inner join DJR_ASOCIACIONES AS ASO on C.FK_ID_ASOCIACION=ASO.ID inner join DJR_PROVEEDORES AS PROV ON C.FK_ID_PROVEEDOR = PROV.ID";
                     boolproductor=false;
                 }
                 //     padrino = Request.Form["padrino"];
@@ -67,8 +67,9 @@ namespace PROYECTOBD1.Pages.AsociacionesMenu.Convenios
                                     ConveniosModel conveniosModel = new ConveniosModel();
                                     conveniosModel.ID = "" + reader.GetInt32(0);
                                     conveniosModel.NOMBREASOCIACION = reader.GetString(1);
-                                    conveniosModel.FECHAINICIO = reader.GetDateTime(2).ToString("yyyy-MM-dd");
-                                    conveniosModel.ESTADO_VIGENCIA = reader.GetString(3);
+                                    conveniosModel.NOMBREPROVEEDORPP = reader.GetString(2);
+                                    conveniosModel.FECHAINICIO = reader.GetDateTime(3).ToString("yyyy-MM-dd");
+                                    conveniosModel.ESTADO_VIGENCIA = reader.GetString(4);
                                     listaConvenios.Add(conveniosModel);
 
                                 }

@@ -2,3 +2,63 @@
 @model PROYECTOBD1.Pages.AsociacionesMenu.Convenios.CrearProdProvModel
 @{
 }
+<br />
+<h2>NUEVA ASOCIACION</h2>
+@if (Model.error.Length > 0)
+{
+        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+            <strong>@Model.error</strong>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='close'></button>
+        </div>
+}
+
+
+<form method="POST">
+    <div class="row mb-3">
+        <select id="Select1" name="idproductor" asp-items="@(new SelectList(Model.listaProductor,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR PRODUCTOR</option>
+        </select>
+    </div>
+    <div class="row mb-3">
+        <select id="Select1" name="idproveedor" asp-items="@(new SelectList(Model.listaProveedor,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR PROVEEDOR</option>
+        </select>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">FECHA DE INICIO (YYYY-MM-DD)</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="fechainicio" value="@Model.fechainicio">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">ESTADO DE VIGENCIA</label>
+        <select id="Select4" name="vigencia">
+            <option value="" selected disabled>SELECCIONAR ESTADO DE VIGENCIA</option>
+            <option value="VIGENTE">VIGENTE</option>
+            <option value="NO VIGENTE">NO VIGENTE</option>
+        </select>
+    </div>
+
+
+
+    @if (Model.correcto.Length > 0)
+    {
+            <div class="row mb-3">
+                <div class="col-sm-9">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>@Model.correcto</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                    </div>
+                </div>
+            </div>
+    }
+    <div class="row mb-3">
+        <div class="col-sm-5 d-grid">
+            <button type="submit" class="btn btn-primary">ACEPTAR</button>
+        </div>
+        <div class="col-sm-5 d-grid">
+            <a class="btn btn-outline-primary" href="/" role="button">CANCELAR</a>
+        </div>
+
+    </div>
+</form>

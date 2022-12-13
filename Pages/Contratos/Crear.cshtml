@@ -1,9 +1,9 @@
 ﻿@page
-@model PROYECTOBD1.Pages.AsociacionesMenu.Convenios.CrearAsoProvModel
+@model PROYECTOBD1.Pages.Contratos.CrearModel
 @{
 }
 <br />
-<h2>NUEVA ASOCIACION</h2>
+<h2>NUEVO CULTIVO</h2>
 @if (Model.error.Length > 0)
 {
     <div class='alert alert-warning alert-dismissible fade show' role='alert'>
@@ -14,31 +14,30 @@
 
 
 <form method="POST">
-    <div class="row mb-3">
-        <select id="Select1" name="idasociacion" asp-items="@(new SelectList(Model.listaAsociaciones,"ID","NOMBRE"))">
-            <option value="" selected disabled>SELECCIONAR ASOCIACION</option>
+        <select id="Select1" name="IDPRODUCTOR" asp-items="@(new SelectList(Model.listaProductor,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR PRODUCTOR</option>
         </select>
-    </div>
-    <div class="row mb-3">
-        <select id="Select1" name="idproveedor" asp-items="@(new SelectList(Model.listaProveedor,"ID","NOMBRE"))">
-            <option value="" selected disabled>SELECCIONAR PROVEEDOR</option>
+        <select id="Select1" name="IDCLIENTE" asp-items="@(new SelectList(Model.listaCliente,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR CLIENTE</option>
         </select>
-    </div>
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">FECHA DE INICIO (YYYY-MM-DD)</label>
+        <label class="col-sm-3 col-form-label">FECHA EMISION</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="fechainicio" value="@Model.fechainicio">
+            <input type="text" class="form-control" name="FECHAEMISION" value="@Model.fechaemision">
         </div>
     </div>
     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">ESTADO DE VIGENCIA</label>
-        <select id="Select4" name="vigencia">
-            <option value="" selected disabled>SELECCIONAR ESTADO DE VIGENCIA</option>
-            <option value="VIGENTE">VIGENTE</option>
-            <option value="NO VIGENTE">NO VIGENTE</option>
-        </select>
+        <label class="col-sm-3 col-form-label">PORCENTAJE DESCUENTO</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="PORCENTAJEDESCUENTO" value="@Model.porcentajedescuento">
+        </div>
     </div>
-
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">TOTAL</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="TOTAL" value="@Model.total">
+        </div>
+    </div>
 
 
     @if (Model.correcto.Length > 0)
