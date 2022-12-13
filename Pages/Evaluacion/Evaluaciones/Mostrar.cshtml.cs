@@ -88,14 +88,14 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "SELECT E.ANIO,E.FECHAEVALUACION,E.DECISIONFINAL,E.RESULTADO,E.PORCENTAJE_RESULTADO, E.FK_ID_CLIENTE, E.FK_ID_PRODUCTOR " +
-                                 "FROM DJR_EVALUACIONES AS E " +
-                                 //"INNER JOIN DJR_CLIENTES AS C ON E.FK_ID_CLIENTE=C.ID" +,P.NOMBRE, C.NOMBRE 
+                    String sql = "SELECT E.ANIO,E.FECHAEVALUACION,E.DECISIONFINAL,E.RESULTADO,E.PORCENTAJE_RESULTADO, E.FK_ID_CLIENTE, E.FK_ID_PRODUCTOR, C.NOMBRE,P.NOMBRE " +
+                                 "FROM DJR_EVALUACIONES AS E,DJR_CLIENTES AS C, DJR_PRODUCTORES AS P " +
+                                 //"INNER JOIN DJR_CLIENTES AS C ON E.FK_ID_CLIENTE=C.ID" + 
                                  //"INNER JOIN DJR_PRODUCTORES AS P ON E.FK_ID_PRODUCTOR=P.ID" +
-                                 "WHERE E.ANIO=2019";
+                                 "WHERE E.FK_ID_CLIENTE=C.ID AND E.FK_ID_PRODUCTOR=P.ID AND C.NOMBRE=@CLIENTE ";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        //command.Parameters.AddWithValue("@CLIENTE", cliente);
+                        command.Parameters.AddWithValue("@CLIENTE", cliente);
                         //Console.WriteLine(cliente);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -111,6 +111,8 @@ namespace PROYECTOBD1.Pages.Evaluacion.Evaluaciones
                                 evaluacion.PORCENTAJE_RESULTADO = (reader.IsDBNull(4) != true) ? "" + reader.GetDecimal(4) : "";
                                 evaluacion.FK_ID_PRODUCTOR = (reader.IsDBNull(5) != true) ? "" + reader.GetInt32(5) : "";
                                 evaluacion.FK_ID_CLIENTE = (reader.IsDBNull(6) != true) ? "" + reader.GetInt32(6) : "";
+                                evaluacion.NOMBRECLIENTE = (reader.IsDBNull(7) != true) ? "" + reader.GetString(7) : "";
+                                evaluacion.NOMBREPRODUCTOR = (reader.IsDBNull(8) != true) ? "" + reader.GetString(8) : "";
                                 listaEva.Add(evaluacion);
                             }
                         }
