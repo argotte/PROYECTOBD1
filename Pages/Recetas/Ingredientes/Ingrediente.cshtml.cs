@@ -11,12 +11,14 @@ namespace PROYECTOBD1.Pages.Recetas.Ingredientes
         public List<IngredienteModelo> listIngredientes = new List<IngredienteModelo>();
         public string errorMessage = "";
         public string successMessage = "";
+        public string idReceta = "";
         //    String connectionString = "Data Source=CHUBE;Initial Catalog=ProyectoCereza;Integrated Security=True";
         public Connection connection2 = new Connection();
         String connectionString = "";
         //    connectionString=connection2.ConnectionString;
         public void OnGet()
         {
+            idReceta = Request.Query["id"];
             connectionString = connection2.ConnectionString;
             string idR = Request.Query["ID"];
             try

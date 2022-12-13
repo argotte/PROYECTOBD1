@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace PROYECTOBD1.Pages.Recetas.Instrucciones
 {
-    public class AñadirModel : PageModel
+    public class AnadirModel : PageModel
     {
         public InstruccionModelo instruccionInfo = new InstruccionModelo();
         public List<InstruccionModelo> listInstruccion = new List<InstruccionModelo>();
@@ -40,6 +40,7 @@ namespace PROYECTOBD1.Pages.Recetas.Instrucciones
         public void OnPost() 
         {
             connectionString = connection2.ConnectionString;
+            instruccionInfo.FK_ID_RECETA = Request.Query["id"];
             instruccionInfo.PASO = Request.Form["PASO"];
             instruccionInfo.DESCRIPCION = Request.Form["DESCRIPCION"];
 
@@ -53,12 +54,13 @@ namespace PROYECTOBD1.Pages.Recetas.Instrucciones
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "INSERT INTO DJR_INSTRUCCIONES" +
-                                 "(PASO, DESCRIPCION) VALUES " +
-                                 "(@PASO, @DESCRIPCION);";
+                    String sql = "INSERT INTO DJR_INSTRUCCIONES " +
+                                 "(FK_ID_RECETA, PASO, DESCRIPCION) VALUES " +
+                                 "(@ID, @PASO, @DESCRIPCION);";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
+                        command.Parameters.AddWithValue("@ID", instruccionInfo.FK_ID_RECETA);
                         command.Parameters.AddWithValue("@PASO", instruccionInfo.PASO);
                         command.Parameters.AddWithValue("@DESCRIPCION",instruccionInfo.DESCRIPCION);
 

@@ -12,7 +12,7 @@ namespace PROYECTOBD1.Pages.Recetas.Cliente
         public List<ClienteModelo> listaClientes = new List<ClienteModelo>();
         public string errorMessage = "";
         public string successMessage = "";
-        //   String connectionString = "Data Source=CHUBE;Initial Catalog=ProyectoCereza;Integrated Security=True";
+        // String connectionString = "Data Source=CHUBE;Initial Catalog=ProyectoCereza;Integrated Security=True";
         public Connection connection2 = new Connection();
         String connectionString = "";
         //    connectionString=connection2.ConnectionString;
