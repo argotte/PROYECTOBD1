@@ -9,7 +9,8 @@ namespace PROYECTOBD1.Pages.Evaluacion.Formulas
     {
         public Connection connection2 = new Connection();
         String connectionString = "";
-
+        public List<ClienteModelo> listaClientes = new List<ClienteModelo>();
+        public string cliente;
         public List<FormulaModelo> listaFor = new List<FormulaModelo>();
       //  String connectionString = "Data Source=DESKTOP-P186VBB;Initial Catalog=ProyectoCereza;Persist Security Info=True;User ID=sa;Password=12345678";
         public void OnGet()
@@ -22,14 +23,18 @@ namespace PROYECTOBD1.Pages.Evaluacion.Formulas
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql = "SELECT F.ID,F.TIPO,F.PORCENTAJEIMPORTANCIA,F.PORCENTAJEACEPTACION,F.FK_ID_CLIENTE,F.FK_ID_CRITERIO_VAR FROM DJR_FORMULAS F";
+                    String sql = "SELECT C.ID,C.NOMBRE FROM DJR_CLIENTES AS C"; //"SELECT F.ID,F.TIPO,F.PORCENTAJEIMPORTANCIA,F.PORCENTAJEACEPTACION,F.FK_ID_CLIENTE,F.FK_ID_CRITERIO_VAR FROM DJR_FORMULAS F";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                FormulaModelo formula=new FormulaModelo();
+                                ClienteModelo cliente = new ClienteModelo();
+                                cliente.ID = (reader.IsDBNull(0) != true) ? "" + reader.GetInt32(0) : "";
+                                cliente.NOMBRE = (reader.IsDBNull(1) != true) ? "" + reader.GetString(1) : "";
+                                listaClientes.Add(cliente);
+                                /*FormulaModelo formula=new FormulaModelo();
                                 formula.ID = (reader.IsDBNull(0) != true) ? "" + reader.GetInt32(0) : "";
                                 formula.TIPO = (reader.IsDBNull(1) != true) ? "" + reader.GetString(1) : "";
                                 formula.PORCENTAJEIMPORTANCIA = (reader.IsDBNull(2) != true) ? "" + reader.GetInt32(2) : "";
@@ -37,13 +42,13 @@ namespace PROYECTOBD1.Pages.Evaluacion.Formulas
                                 formula.FK_ID_CLIENTE = (reader.IsDBNull(4) != true) ? "" + reader.GetInt32(4) : "";
                                 formula.FK_ID_CRITERIO = (reader.IsDBNull(5) != true) ? "" + reader.GetInt32(5) : "";
                                 //       paisModelo.Ciudades= new List<CiudadModelo>();
-                                listaFor.Add(formula);
+                                listaFor.Add(formula);*/
                             }
                         }
                     }
                 }
 
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                /*using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     String sql = "SELECT C.NOMBRE,P.NOMBRE FROM DJR_CLIENTES C, DJR_CRITERIOS_VAR P WHERE P.ID= @CRITERIO AND C.ID= @CLIENTE";
@@ -65,13 +70,59 @@ namespace PROYECTOBD1.Pages.Evaluacion.Formulas
                         }
                     }
                     }
-                }
+                }*/
             }
             catch (Exception)
             {
 
                 throw;
             }
+        }
+
+        public void OnPost()
+        {
+            connectionString = connection2.ConnectionString;
+            try
+            {
+                cliente = Request.Form["cliente"];
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    String sql = "SELECT F.ID, F.TIPO, F.PORCENTAJEIMPORTANCIA, F.PORCENTAJEACEPTACION, F.FK_ID_CLIENTE, F.FK_ID_CRITERIO_VAR, C.NOMBRE, P.NOMBRE " +
+                                 "FROM DJR_FORMULAS AS F " +
+                                 "INNER JOIN DJR_CLIENTES AS C ON F.FK_ID_CLIENTE=C.ID " + 
+                                 "INNER JOIN DJR_CRITERIOS_VAR AS P ON F.FK_ID_CRITERIO_VAR=P.ID " +
+                                 "WHERE C.NOMBRE=@CLIENTE ";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@CLIENTE", cliente);
+                        //Console.WriteLine(cliente);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            //      command.Parameters.AddWithValue("@PAIS", pais);
+
+                            while (reader.Read())
+                            {
+                                FormulaModelo formula = new FormulaModelo();
+                                formula.ID = (reader.IsDBNull(0) != true) ? "" + reader.GetInt32(0) : "";
+                                formula.TIPO = (reader.IsDBNull(1) != true) ? "" + reader.GetString(1) : "";
+                                formula.PORCENTAJEIMPORTANCIA = (reader.IsDBNull(2) != true) ? "" + reader.GetInt32(2) : "";
+                                formula.PORCENTAJEACEPTACION = (reader.IsDBNull(3) != true) ? "" + reader.GetInt32(3) : "";
+                                formula.FK_ID_CLIENTE = (reader.IsDBNull(4) != true) ? "" + reader.GetInt32(4) : "";
+                                formula.FK_ID_CRITERIO = (reader.IsDBNull(5) != true) ? "" + reader.GetInt32(5) : "";
+                                formula.NOMBRECLIENTE = (reader.IsDBNull(6) != true) ? "" + reader.GetString(6) : "";
+                                formula.NOMBRECRITERIO = (reader.IsDBNull(7) != true) ? "" + reader.GetString(7) : "";
+                                listaFor.Add(formula);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR: " + ex.Message);
+            }
+            OnGet();
         }
     }
 }

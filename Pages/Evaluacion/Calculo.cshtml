@@ -1,0 +1,65 @@
+﻿@page
+@model PROYECTOBD1.Pages.Evaluacion.CalculoModel
+@{
+}
+<br />
+<form method="post">
+    <h1 class="text-center">
+        <h2>SELECCIONA UN CRITERIO PARA CALCULAR</h2>
+        <hr />
+        @*                                                                             CUAL TOMA,CUAL MUESTRA*@
+        <select id="Select2" name="criterio" asp-items="@(new SelectList(Model.listaCri,"NOMBRE","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR CRITERIO</option>
+        </select>
+
+        <hr />
+        @*                                                                             CUAL TOMA,CUAL MUESTRA*@
+        <select id="Select2" name="NOT" asp-items="@(new SelectList(Model.listaClientes,"NOMBRE","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR CLIENTE</option>
+        </select><!---->
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">CLIENTE</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="cliente" value="@Model.cliente">
+
+            </div>
+        </div>
+        <hr />
+        @*                                                                             CUAL TOMA,CUAL MUESTRA*@
+        <select id="Select2" name="productor" asp-items="@(new SelectList(Model.listaProd,"NOMBRE","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR PRODUCTOR</option>
+        </select><!---->
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">PRODUCTOR</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="productorAux" value="@Model.productorAux">
+
+            </div>
+        </div>
+        
+    </h1>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">PORCENTAJE</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="num" value="@Model.num">
+
+        </div>
+    </div>
+    <body>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    @foreach(var item in Model.criteriosAgregados){
+                        <dl>
+                            <dt>ultimo criterio agregado @item.NOMBRE</dt>
+                            <dt>numero=@Model.num</dt>
+                            <dt>importancia formula=@Model.importancia</dt>
+                            <dt>resultado porcentaje=@Model.res</dt>
+                        </dl>
+                    }
+                </div>
+            </div>
+        </div>
+    </body>
+    <input type="submit" value="ACEPTAR" />
+</form>
