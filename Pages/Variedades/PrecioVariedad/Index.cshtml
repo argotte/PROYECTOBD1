@@ -1,5 +1,5 @@
 ﻿@page
-@model PROYECTOBD1.Pages.PaisOrigen.IndexModel
+@model PROYECTOBD1.Pages.Variedades.PrecioVariedad.IndexModel
 @{
 }
 @if (Model.error.Length > 0)
@@ -15,6 +15,10 @@
 
             <td>PAIS</td>
             <td>TIPO DE VARIEDAD</td>
+            <td>VALIDO DESDE</td>
+            <td>HASTA</td>
+            <td>PRECIO</td>
+            <td>CALIBRE</td>
             <td></td>
             <td></td>
 
@@ -23,12 +27,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.listapaisorigen)
+        @foreach (var item in Model.listaprecio)
         {
             <tr>
 
                 <td>@item.PAIS</td>
                 <td>@item.VARIEDAD</td>
+                <td>@item.FECHAINICIO</td>
+                <td>@item.FECHAFIN</td>
+                <td>$@item.PRECIO</td>
+                <td>@item.CALIBRE</td>
                 <td></td>
                 <td></td>
 

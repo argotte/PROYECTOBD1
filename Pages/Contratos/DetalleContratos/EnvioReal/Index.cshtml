@@ -1,0 +1,37 @@
+﻿@page
+@model PROYECTOBD1.Pages.Contratos.DetalleContratos.EnvioReal.IndexModel
+@{
+}
+@if (Model.error.Length > 0)
+{
+        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+            <strong>@Model.error</strong>
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='close'></button>
+        </div>
+}
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+
+            <td>NOMBRE CLIENTE</td>
+            <td>NOMBRE PRODUCTOR</td>
+            <td>FECHA DE ENVIO</td>
+            <td>KILOGRAMOS</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaEnvio)
+        {
+                <tr>
+
+                    <td>@item.NOMBRECLIENTE</td>
+                    <td>@item.NOMBREPRODUCTOR</td>
+                    <td>@item.FECHA</td>
+                    <td>@item.KG KG</td>
+
+                </tr>
+        }
+    </tbody>
+</table>
+

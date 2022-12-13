@@ -1,0 +1,26 @@
+﻿@page
+@model PROYECTOBD1.Pages.Recetas.Ingredientes.IngredienteModel
+@{
+}
+<br>
+<h2>Lista de Ingredientes</h2>
+<a class='btn btn-primary btn-sm' href='/Recetas/Ingredientes/Crear'>Nuevo ingrediente</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>MEDIDA</th>
+            <th>CANTIDAD</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listIngredientes)
+        {
+            <tr>
+                <td>@item.NOMBREINGREDIENTE</td>
+                <td>@item.NOMBREMEDIDA</td>
+                <td>@item.CANTIDAD</td>
+            </tr>
+        }
+    </tbody>
+</table>

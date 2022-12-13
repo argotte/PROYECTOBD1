@@ -1,5 +1,5 @@
 ﻿@page
-@model PROYECTOBD1.Pages.PaisOrigen.IndexModel
+@model PROYECTOBD1.Pages.Contratos.Renovaciones.IndexModel
 @{
 }
 @if (Model.error.Length > 0)
@@ -13,27 +13,25 @@
     <thead>
         <tr>
 
-            <td>PAIS</td>
-            <td>TIPO DE VARIEDAD</td>
-            <td></td>
-            <td></td>
-
-
+            <td>NOMBRE CLIENTE</td>
+            <td>NOMBRE PRODUCTOR</td>
+            <td>FECHA DE RENOVACION</td>
+            <td>TOTAL</td>
 
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.listapaisorigen)
+        @foreach (var item in Model.listaRenovacion)
         {
             <tr>
 
-                <td>@item.PAIS</td>
-                <td>@item.VARIEDAD</td>
-                <td></td>
-                <td></td>
-
+                <td>@item.NOMBRECLIENTE</td>
+                <td>@item.NOMBREPRODUCTOR</td>
+                <td>@item.FECHARENOVACION</td>
+                <td>@item.TOTALDOLARES$</td>
 
             </tr>
         }
     </tbody>
 </table>
+

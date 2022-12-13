@@ -1,5 +1,5 @@
 ﻿@page
-@model PROYECTOBD1.Pages.PaisOrigen.IndexModel
+@model PROYECTOBD1.Pages.Contratos.DetalleContratos.Pagos.IndexModel
 @{
 }
 @if (Model.error.Length > 0)
@@ -13,27 +13,25 @@
     <thead>
         <tr>
 
-            <td>PAIS</td>
-            <td>TIPO DE VARIEDAD</td>
-            <td></td>
-            <td></td>
-
-
+            <td>NOMBRE CLIENTE</td>
+            <td>NOMBRE PRODUCTOR</td>
+            <td>FECHA DE PAGO</td>
+            <td>MONTO</td>
 
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.listapaisorigen)
+        @foreach (var item in Model.listaPago)
         {
             <tr>
 
-                <td>@item.PAIS</td>
-                <td>@item.VARIEDAD</td>
-                <td></td>
-                <td></td>
-
+                <td>@item.NOMBRECLIENTE</td>
+                <td>@item.NOMBREPRODUCTOR</td>
+                <td>@item.FECHA</td>
+                <td>$@item.MONTO_DOLARES</td>
 
             </tr>
         }
     </tbody>
 </table>
+

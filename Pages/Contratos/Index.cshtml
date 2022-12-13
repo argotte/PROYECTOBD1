@@ -1,0 +1,54 @@
+﻿@page
+@model PROYECTOBD1.Pages.Contratos.IndexModel
+@{
+}
+<br />
+<h2>CONSULTA DE CONTRATOS</h2>
+<a class='btn btn-primary btn-sm' href='/Contratos/Crear'>Nuevo Contrato</a>
+<form method="post">
+    <h6 class="text-center">
+        <hr />
+        @*                                                                             CUAL TOMA,CUAL MUESTRA*@
+        <select id="Select1" name="idproductor" asp-items="@(new SelectList(Model.listaProductor,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR PRODUCTOR</option>
+        </select>
+        <select id="Select1" name="idcliente" asp-items="@(new SelectList(Model.listaCliente,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR CLIENTE</option>
+        </select>
+
+        <input type="submit" value="ACEPTAR" />
+    </h6>
+</form>
+
+
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th>CLIENTE</th>
+            <th>PRODUCTORA</th>
+            <th>FECHA DE EMISIÓN</th>
+            <th>PORCENTAJE DE DESCUENTO</th>
+            <th>TOTAL</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaContrato)
+        {
+            <tr>
+                <td>@item.NOMBRECLIENTE</td>
+                <td>@item.NOMBREPRODUCTOR</td>
+                <td>@item.FECHA_EMITIDO</td>
+                <td>@item.PORCENTAJEDESCUENTO%</td>
+                <td>$@item.TOTAL</td>
+                <th>
+                    <a class="btn btn-primary btn-sm" href="/Contratos/Renovaciones/Index?id=@item.ID">RENOVACIONES</a>
+                </th>
+                <th>
+                    <a class="btn btn-primary btn-sm" href="/Contratos/DetalleContratos/Index?id=@item.ID">DETALLES</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

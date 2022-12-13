@@ -1,0 +1,77 @@
+﻿@page
+@model PROYECTOBD1.Pages.Recetas.Productor.IndexPModel
+@{
+}
+
+<br>
+<h2>Nueva Receta</h2>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label='Close'></button>
+    </div>
+}
+
+<form method="POST">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">NOMBRE</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="NOMBRE" value="@Model.recetaInfo.NOMBRE">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">TIPO</label>
+        <select id="Select3" name="TIPO">
+            <option value="" selected disabled>SELECCIONAR TIPO</option>
+            <option value="DULCE">DULCE</option>
+            <option value="SALADO">SALADO</option>
+        </select>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">DESCRIPCION</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="DESCRIPCION" value="@Model.recetaInfo.DESCRIPCION">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">TIEMPO DE PREPARACION</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="TIEMPOPREPARACION" value="@Model.recetaInfo.TIEMPOPREPARACION">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">RACIONES</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="RACIONES" value="@Model.recetaInfo.RACIONES">
+        </div>
+    </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">ASIGNE UN PRODUCTOR</label>
+            <select id="Select1" name="PRODUCTOR" asp-items="@(new SelectList(Model.listaProductores,"ID","NOMBRE"))">
+                <option value="" selected disabled>SELECCIONAR PRODUCTOR</option>
+            </select>
+        </div>
+
+    @if (Model.successMessage.Length > 0)
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@Model.successMessage</strong>
+                    <button type='button' class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row mb-3">
+        <div class="col-sm-5 d-grid">
+            <button type="submit" class="btn btn-primary">ACEPTAR</button>
+        </div>
+        <div class="col-sm-5 d-grid">
+            <a class="btn btn-outline-primary" href="/" role="button">CANCELAR</a>
+        </div>
+    </div>
+</form>

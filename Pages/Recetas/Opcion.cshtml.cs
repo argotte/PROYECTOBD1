@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PROYECTOBD1.Pages.AsociacionesMenu.Convenios
+namespace PROYECTOBD1.Pages.Recetas
 {
-    public class ConveniosModel : PageModel
+    public class OpcionModel : PageModel
     {
         public void OnGet()
         {

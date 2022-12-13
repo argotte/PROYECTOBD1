@@ -1,0 +1,47 @@
+﻿@page
+@model PROYECTOBD1.Pages.Recetas.IndexModel
+@{
+}
+
+<br />
+<form method="post">
+    <h2>LISTA DE CLIENTES</h2>
+    <h1 class="text-center">
+        <hr />
+        @*                                                                             CUAL TOMA,CUAL MUESTRA*@
+        <select id="Select1" name="cliente" asp-items="@(new SelectList(Model.listaClientes,"ID","NOMBRE"))">
+            <option value="" selected disabled>SELECCIONAR PRODUCTOR</option>
+        </select>
+        <input type="submit" value="ACEPTAR" />
+    </h1>
+</form>
+<a class='btn btn-primary btn-sm' href='/Recetas/Cliente/IndexC'>Nueva receta</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NOMBRE</th>
+            <th>TIPO</th>
+            <th>DESCRIPCION</th>
+            <th>TIEMPO PREPARACION</th>
+            <th>RACIONES</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.listRecetas)
+            {
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.NOMBRE</td>
+                    <td>@item.TIPO</td>
+                    <td>@item.DESCRIPCION</td>
+                    <td>@item.TIEMPOPREPARACION</td>
+                    <td>@item.RACIONES</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="/Recetas/Instrucciones/Ver?id=@item.ID">Ver</a>
+                        <a class="btn btn-primary btn-sm" href="/Recetas/Ingredientes/Ingrediente?id=@item.ID">Ingredientes</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+</table>

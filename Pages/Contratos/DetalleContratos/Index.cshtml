@@ -1,0 +1,58 @@
+﻿@page
+@model PROYECTOBD1.Pages.Contratos.DetalleContratos.IndexModel
+@{
+}
+<br />
+<h2>DETALLES DE CONTRATO</h2>
+@if (Model.error.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.error</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='close'></button>
+    </div>
+}
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+
+            <td>NOMBRECLIENTE</td>
+            <td>NOMBRE PRODUCTOR</td>
+            <td>FECHA DE ENVIO</td>
+            <td>FECHA MAXIMA DE ENVIO</td>
+            <td>CANTIDAD KG</td>
+            <td>PORCENTAJE DESCUENTO</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listaDetalleContrato)
+        {
+            <tr>
+
+                <td>@item.NOMBRECLIENTE</td>
+                <td>@item.NOMBREPRODUCTOR</td>
+                <td>@item.FECHAENVIO</td>
+                <td>@item.FECHAENVIOMAX</td>
+                <td>@item.CANTIDAD_KG</td>
+                <td>@item.PORCENTAJEDESCUENTO%</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Contratos/DetalleContratos/ProduccionAnual/Index?id=@item.ID">PRODUCCION ANUAL</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Contratos/DetalleContratos/Pagos/Index?id=@item.ID">PAGOS</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Contratos/DetalleContratos/EnvioReal/Index?id=@item.ID">ENVIOS REALES</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Contratos/DetalleContratos/CondicionPago/Index?id=@item.ID">CONDICION PAGO</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

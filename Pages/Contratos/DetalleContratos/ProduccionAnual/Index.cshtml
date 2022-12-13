@@ -1,0 +1,40 @@
+﻿@page
+@model PROYECTOBD1.Pages.Contratos.DetalleContratos.ProduccionAnual.IndexModel
+@{
+}
+@if (Model.error.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.error</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='close'></button>
+    </div>
+}
+<table id="myTable" class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+
+            <td>NOMBRE PRODUCTOR</td>
+            <td>NOMBRE CLIENTE</td>
+            <td>TIPO DE VARIEDAD DE CEREZA</td>
+            <td>FECHA</td>
+            <td>CANTIDAD</td>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.pam)
+        {
+            <tr>
+
+                <td>@item.NOMBREPRODUCTOR</td>
+                <td>@item.NOMBRECLIENTE</td>
+                <td>@item.NOMBREVARIEDAD</td>
+                <td>@item.ANO</td>
+                <td>@item.TOTALKG KG</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
