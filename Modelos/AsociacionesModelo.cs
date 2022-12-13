@@ -11,5 +11,6 @@
         ///
         public string NOMBREPAIS { get; set; }
         public string NOMBREREGION { get; set; }
+        public string NOMBREPRODUCTOR { get; set; }
     }
 }

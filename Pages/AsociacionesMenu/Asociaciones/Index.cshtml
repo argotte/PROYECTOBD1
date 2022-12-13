@@ -22,6 +22,8 @@
         <tr>
             <th>REGION</th>
             <th>NOMBRE DE ASOCIACION</th>
+            <th>NOMBRE PRODUCTOR</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -30,7 +32,12 @@
             <tr>
                 <td>@item.NOMBREREGION</td>
                 <td>@item.NOMBRE</td>
+                <td>@item.NOMBREPRODUCTOR</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/AsociacionesMenu/Asociaciones/AgregarProductor?id=@item.ID">Añadir otra Productora a esta asociación.</a>
+                </td>
             </tr>
+            
         }
     </tbody>
 </table>
